@@ -1,0 +1,38 @@
+// font face
+$font-family-primary: 'Open Sans', Arial, Helvetica, Garuda, sans-serif;
+//$font-family-secondary: "open_sanssemibold", Arial, Helvetica, Garuda, sans-serif;
+$font-base-family: $font-family-primary;
+
+
+// font size
+$font-base-size: 16px;
+
+
+//font style
+$font-style-italic: italic;
+
+
+// font width
+$weight-light: 300;
+$weight-normal: 400;
+$weight-semi-bold: 600;
+$weight-bold: 700;
+$weight-extra-bold: 800;
+
+
+// paths
+$dir: "../../../img";
+$dirIc: "#{$dir}/icons";
+
+
+// colors
+$clrs: (
+  primary: #fff,
+);
+
+
+$screen-lg: "only screen and (min-width: 1200px)";
+$screen-md: "only screen and (min-width: 992px)";
+$screen-sm: "only screen and (min-width: 768px)";
+$screen-ex: "only screen and (min-width: 480px)";
+$retina: "(min-resolution: 144dpi), (min-resolution: 1.5 dppx)";

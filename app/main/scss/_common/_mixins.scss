@@ -1,0 +1,71 @@
+@mixin text-overflow($max-width) {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  @if ($max-width !=full) {
+    max-width: $max-width;
+  }
+}
+
+@mixin arrow($width, $height, $direction, $color) {
+  height: 0;
+  width: 0;
+  @if ($direction==right) {
+    border-top: $height/2 solid transparent;
+    border-bottom: $height/2 solid transparent;
+    border-left: $width solid $color;
+  }
+  @if ($direction==left) {
+    border-top: $height/2 solid transparent;
+    border-bottom: $height/2 solid transparent;
+    border-right: $width solid $color;
+  }
+  @if ($direction==up) {
+    border-left: $width/2 solid transparent;
+    border-right: $width/2 solid transparent;
+    border-bottom: $height solid $color;
+  }
+  @if ($direction==down) {
+    border-left: $width/2 solid transparent;
+    border-right: $width/2 solid transparent;
+    border-top: $height solid $color;
+  }
+}
+
+@mixin arrow-stroke($width, $height, $background, $stroke, $color, $direction) {
+  background: $background;
+  border: solid $color;
+  height: $height;
+  width: $width;
+  @if ($direction==top) {
+    border-width: $stroke $stroke 0 0;
+    transform: rotate(-45deg);
+  }
+  @if ($direction==right) {
+    border-width: $stroke $stroke 0 0;
+    transform: rotate(45deg);
+  }
+  @if ($direction==bottom) {
+    border-width: 0 $stroke $stroke 0;
+    transform: rotate(45deg);
+  }
+  @if ($direction==left) {
+    border-width: $stroke 0 0 $stroke;
+    transform: rotate(-45deg);
+  }
+}
+
+@mixin placecolor($color: #000000) {
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+  &:-moz-placeholder {
+    color: $color;
+  }
+  &::-moz-placeholder {
+    color: $color;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+}
