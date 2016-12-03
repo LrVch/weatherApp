@@ -1,0 +1,11 @@
+.celcius {
+  position: relative;
+
+  &:after {
+    position: absolute;
+    content: "˚";
+    //font-weight: bold;
+    top: -6px;
+    font-size: 36px;
+  }
+}

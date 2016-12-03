@@ -1,3 +1,19 @@
 .search {
-  color: violet;
+  height: 30%;
+}
+
+.search__inner {
+
+}
+
+.search__input {
+  width: 100%;
+  padding: 20px;
+  border: solid 1px transparent;
+  border-radius: 0;
+  background-color: #fafafa;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.35);
+  font-size: 22px;
+  -webkit-appearance: none;
+  text-overflow: ellipsis;
 }

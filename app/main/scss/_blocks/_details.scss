@@ -1,0 +1,28 @@
+.details {
+  max-width: 60%;
+  margin: 0;
+  padding: 0;
+}
+
+.details__item {
+  @extend %clearfix;
+
+  margin-bottom: 5px;
+  list-style-type: none;
+  transition: all .3s;
+}
+
+.details__item-text {
+  float: left;
+  width: 70%;
+}
+
+.details__num {
+  float: right;
+  width: 30%;
+  text-align: right;
+}
+
+.details__hidden {
+  display: none;
+}

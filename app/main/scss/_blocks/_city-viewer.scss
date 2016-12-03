@@ -1,0 +1,33 @@
+.city-viewer {
+  height: 100%;
+  color: rgba(0, 0, 0, .6);
+}
+
+
+.city-viewer__inner {
+  height: inherit;
+  overflow: auto;
+}
+
+.city-viewer__item {
+  @include text-overflow(null);
+
+  position: relative;
+  padding: 12px;
+  padding-right: 40px;
+  margin-bottom: 10px;
+
+  border: solid 1px transparent;
+  border-radius: 0;
+  background-color: #fafafa;
+  box-shadow: 2px 2px 4px map-get($clrs, smooth-gray);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.city-viewer__item-close {
+  @include closeBtn(20px, 2px, smooth-gray, 10px, 10px);
+  box-shadow: none;
+}

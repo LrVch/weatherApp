@@ -69,3 +69,37 @@
     color: $color;
   }
 }
+
+@mixin closeBtn ($width, $thickness, $color, $top, $right) {
+    position: absolute;
+    width: $width;
+    height: $width;
+    top: $top;
+    right: $right;
+    border-radius: 50%;
+    border: $thickness solid map-get($clrs, $color);
+    transform: rotate(45deg);
+    box-shadow: 0 0  12px #666;
+
+    &:before,
+    &:after {
+      position: absolute;
+      content: "";
+      background: map-get($clrs, $color);
+    }
+
+    &:before {
+      width: 100%;
+      height: $thickness;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &:after {
+      width: $thickness;
+      height: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+
+    }
+}

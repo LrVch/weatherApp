@@ -17,30 +17,169 @@
       <!-- maincontent-->
       <div class="maincontent">
         <!-- menu-->
-<div class="menu">
-  <div class="menu__inner">
-    <div class="menu__close">close menu</div>good menu
+<div class="menu open">
+  <div class="menu__inner"><a class="menu__close" href="#"></a>
     <div class="menu__search">
 <div class="search">
-  <div class="search__inner">good search</div>
+  <div class="search__inner">
+    <input class="search__input" type="text" placeholder="start type city's name">
+  </div>
 </div>
     </div>
     <div class="menu__city-viewer">
 <div class="city-viewer">
-  <div class="city-viewer__inner">good city-viewer</div>
-</div>
-    </div>
+  <div class="city-viewer__inner">
+    <div class="city-viewer__item">Toronto, Canada<a class="city-viewer__item-close" href="#"></a></div>
+    <div class="city-viewer__item">Los Angeles, USA<a class="city-viewer__item-close" href="#"></a></div>
+    <div class="city-viewer__item">Los Angeles, USA<a class="city-viewer__item-close" href="#"></a></div>
+    <div class="city-viewer__item">Los Angeles, USA<a class="city-viewer__item-close" href="#"></a></div>
+    <div class="city-viewer__item">Los Angeles, USA<a class="city-viewer__item-close" href="#"></a></div>
+    <div class="city-viewer__item">Los Angeles, USA<a class="city-viewer__item-close" href="#"></a></div>
+    <div class="city-viewer__item">Los Angeles, USA<a class="city-viewer__item-close" href="#"></a></div>
+    <div class="city-viewer__item">Los Angeles, USA<a class="city-viewer__item-close" href="#"></a></div>
+    <div class="city-viewer__item">Los Angeles, USA<a class="city-viewer__item-close" href="#"></a></div>
+    <div class="city-viewer__item">Los Angeles, USA<a class="city-viewer__item-close" href="#"></a></div>
+    <div class="city-viewer__item">Los Angeles, USA<a class="city-viewer__item-close" href="#"></a></div>
   </div>
 </div>
-        <!-- END menu-->
-        <!-- maincontent__content-->
-<div class="content">
-  <div class="content__inner">good content</div>
+    </div>
+    <div class="menu__tongue"></div>
+  </div>
+  <div class="menu__overflow"></div>
 </div>
-        <!-- END maincontent__content-->
+        <!-- END menu-->
+        <!-- content-->
+<div class="content">
+  <div class="content__inner">
+<div class="current-city">
+  <div class="current-city__inner">
+<div class="city">
+  <div class="city__name">Toronto, Canada</div>
+  <div class="city__descr">
+    <div class="city__descr-main">
+      <div class="city__weather">Cloudly</div>
+      <div class="city__temp celcius">18</div>
+    </div>
+    <div class="city__descr-img-wrap"><img class="city__descr-img" src="http://openweathermap.org/img/w/10d.png">
+      <div class="city__date">25 November</div>
+    </div>
+  </div>
+<div class="details">
+  <div class="details__item"><span class="details__item-text">Feels like</span><span class="details__num celcius">14</span></div>
+  <div class="details__item"><span class="details__item-text">Humidity</span><span class="details__num">55%</span></div>
+  <div class="details__item"><span class="details__item-text">Wind speed</span><span class="details__num">3</span></div>
+  <div class="details__hidden">
+    <div class="details__item"><span class="details__item-text">Sample</span><span class="details__num">3</span></div>
+    <div class="details__item"><span class="details__item-text">Sample</span><span class="details__num">3</span></div>
+  </div>
+</div>
+<div class="hourly">
+  <div class="hourly__inner">
+    <div class="hourly__slider">
+      <div class="hourly__slide">
+        <div class="hourly__slide-time">21:00</div>
+        <div class="hourly__slide-temp">10</div>
+      </div>
+      <div class="hourly__slide">
+        <div class="hourly__slide-time">21:00</div>
+        <div class="hourly__slide-temp">10</div>
+      </div>
+      <div class="hourly__slide">
+        <div class="hourly__slide-time">21:00</div>
+        <div class="hourly__slide-temp">10</div>
+      </div>
+      <div class="hourly__slide">
+        <div class="hourly__slide-time">21:00</div>
+        <div class="hourly__slide-temp">11</div>
+      </div>
+      <div class="hourly__slide">
+        <div class="hourly__slide-time">21:00</div>
+        <div class="hourly__slide-temp">12</div>
+      </div>
+    </div>
+  </div>
+</div><a class="city__more" href="#">more details</a>
+</div>
+  </div>
+  <div class="current-city__overlay"></div>
+</div>
+<div class="addition">
+  <ul class="addition__list">
+    <li class="addition__item">
+<div class="nex-day">
+  <div class="nex-day__img-wrapper"><img class="nex-day__img" src="http://openweathermap.org/img/w/10d.png"></div>
+  <div class="nex-day__desc">
+    <div class="nex-day__date">4 Nov</div>
+    <div class="nex-day__weather">Cloudly</div>
+  </div>
+  <div class="nex-day__temp">
+    <div class="nex-day__temp-day celcius">12</div>
+    <div class="nex-day__temp-hight celcius">5</div>
+  </div>
+</div>
+    </li>
+    <li class="addition__item">
+<div class="nex-day">
+  <div class="nex-day__img-wrapper"><img class="nex-day__img" src="http://openweathermap.org/img/w/10d.png"></div>
+  <div class="nex-day__desc">
+    <div class="nex-day__date">4 Nov</div>
+    <div class="nex-day__weather">Cloudly</div>
+  </div>
+  <div class="nex-day__temp">
+    <div class="nex-day__temp-day celcius">12</div>
+    <div class="nex-day__temp-hight celcius">5</div>
+  </div>
+</div>
+    </li>
+    <li class="addition__item">
+<div class="nex-day">
+  <div class="nex-day__img-wrapper"><img class="nex-day__img" src="http://openweathermap.org/img/w/10d.png"></div>
+  <div class="nex-day__desc">
+    <div class="nex-day__date">4 Nov</div>
+    <div class="nex-day__weather">Cloudly</div>
+  </div>
+  <div class="nex-day__temp">
+    <div class="nex-day__temp-day celcius">12</div>
+    <div class="nex-day__temp-hight celcius">5</div>
+  </div>
+</div>
+    </li>
+    <li class="addition__item">
+<div class="nex-day">
+  <div class="nex-day__img-wrapper"><img class="nex-day__img" src="http://openweathermap.org/img/w/10d.png"></div>
+  <div class="nex-day__desc">
+    <div class="nex-day__date">4 Nov</div>
+    <div class="nex-day__weather">Cloudly</div>
+  </div>
+  <div class="nex-day__temp">
+    <div class="nex-day__temp-day celcius">12</div>
+    <div class="nex-day__temp-hight celcius">5</div>
+  </div>
+</div>
+    </li>
+    <li class="addition__item">
+<div class="nex-day">
+  <div class="nex-day__img-wrapper"><img class="nex-day__img" src="http://openweathermap.org/img/w/10d.png"></div>
+  <div class="nex-day__desc">
+    <div class="nex-day__date">4 Nov</div>
+    <div class="nex-day__weather">Cloudly</div>
+  </div>
+  <div class="nex-day__temp">
+    <div class="nex-day__temp-day celcius">12</div>
+    <div class="nex-day__temp-hight celcius">5</div>
+  </div>
+</div>
+    </li>
+  </ul>
+</div>
+  </div>
+</div>
+        <!-- END content-->
       </div>
       <!-- END maincontent-->
     </div>
     <!-- END wrapper-->
-  <script type="text/javascript" src="/app.js?hash=bc485e395e3ce415dd61"></script></body>
+    <div class="overflow"></div>
+    <div class="preloader"></div>
+  <script type="text/javascript" src="/app.js?hash=78ff354280cf86da547d"></script></body>
 </html>

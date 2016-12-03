@@ -84,7 +84,7 @@ module.exports = {
                 loader: ExtractTextPlugin.extract("style", 'css!autoprefixer?browsers=last 2 versions!resolve-url!sass?sourceMap')
             },
             {
-                test: /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
+                test: /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)$/,
                 loader: addHash('file?name=[path][name].[ext]', 'hash:6')
             }
             // ,

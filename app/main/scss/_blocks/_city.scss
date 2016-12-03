@@ -1,0 +1,56 @@
+.city {
+  position: relative;
+  height: 100%;
+  padding: 20px;
+}
+
+.city__name {
+  text-align: right;
+}
+
+.city__descr {
+  @extend %clearfix;
+
+  margin-bottom: 10px;
+}
+
+.city__descr-main {
+  float: left;
+}
+
+.city__weather {
+  margin-bottom: 10px;
+  font-size: 26px;
+}
+
+.city__temp {
+  font-size: 40px;
+}
+
+//sup.city__temp-null &#730;
+.city__descr-img-wrap {
+  float: right;
+  text-align: right;
+}
+
+.city__descr-img {
+  width: 140px;
+  margin-bottom: -25px;
+  transition: all .3s;
+}
+
+.city__date {
+  text-align: right;
+  transition: all .3s;
+}
+
+.city__more {
+  @extend %no-link;
+
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  display: block;
+  text-align: right;
+  color: map-get($clrs, dark);
+}

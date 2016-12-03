@@ -1,0 +1,63 @@
+.menu {
+  position: absolute;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100%;
+  min-height: 100%;
+  background: #f00;
+  transition: left .3s;
+
+  &.open {
+    left: 0;
+
+    .menu__overflow {
+      display: block;
+    }
+  }
+}
+
+.menu__inner {
+  position: relative;
+  z-index: 11;
+  height: 100%;
+  min-height: 100%;
+  padding: 0 20px 10px 0;
+  background: map-get($clrs, primary);
+}
+
+.menu__close {
+  @include closeBtn(40px, 4px, smooth-gray, 10px, 10px);
+}
+
+.menu__overflow {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10;
+}
+
+.menu__search {
+  height: 20%;
+  padding-top: 65px;
+}
+
+.menu__city-viewer {
+  height: 80%;
+  padding-top: 30px;
+}
+
+.menu__tongue {
+  position: absolute;
+  width: 6px;
+  height: 100px;
+  background: map-get($clrs, smooth-gray);
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 0 3px 3px 0;
+}

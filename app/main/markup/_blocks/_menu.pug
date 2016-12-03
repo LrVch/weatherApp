@@ -1,9 +1,9 @@
-.menu
+.menu.open
     .menu__inner
-        .menu__close
-            | close menu
-        | good menu
+        a(href="#").menu__close
         .menu__search
             include ./_search.pug
         .menu__city-viewer
             include ./_city-viewer.pug
+        .menu__tongue
+    .menu__overflow

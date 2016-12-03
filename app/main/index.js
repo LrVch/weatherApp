@@ -16,11 +16,19 @@ if (NODE_ENV === 'development') {
  logic
 */
 
-fetch("/backend/test.json")
-    .then(response => {
-        return response.json();
-    })
-    .then(result => {
-        console.log(result)
-        // document.body.innerHTML = result;
-    });
+
+import "./../modules/view/content";
+import Menu from "./../modules/view/menu";
+import './../vendors/hammer';
+
+const mainElem = new Hammer(document.body);
+const menu = new Menu(document.querySelector(".menu"));
+
+
+mainElem.on("swipeleft", function(ev) {
+    menu.hide();
+});
+mainElem.on("swiperight", function(ev) {
+    menu.show();
+});
+

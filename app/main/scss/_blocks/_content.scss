@@ -1,0 +1,11 @@
+.content {
+  height: 100%;
+  min-height: 100%;
+  overflow: hidden;
+
+  .content__inner {
+    height: inherit;
+    min-height: inherit;
+    background: #f1f1f1;
+  }
+}

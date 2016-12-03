@@ -28,7 +28,11 @@ $dirIc: "#{$dir}/icons";
 // colors
 $clrs: (
   primary: #fff,
+  dark: #000,
+  smooth-gray: rgba(0, 0, 0, 0.35)
 );
+
+$boxShadowPrimary: 0 0 10px #ccc;
 
 
 $screen-lg: "only screen and (min-width: 1200px)";

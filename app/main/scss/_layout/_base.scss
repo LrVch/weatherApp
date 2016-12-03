@@ -1,4 +1,7 @@
-﻿
+﻿* {
+  box-sizing: border-box;
+}
+
 //===============================================
 html,
 body {
@@ -16,46 +19,33 @@ html {
   position: relative;
 }
 
-body {
-  // position: relative;
-}
+body {}
 
-.wrapper {
-  position: relative;
+.wrapper,
+.maincontent {
+  height: 100%;
   min-height: 100%;
 }
 
 .maincontent {
-
+  position: relative;
 }
-
-
-// %container {
-//   width: $container-width;
-//   margin: 0 auto;
-// }
-// %container-flu {
-//   max-width: $container-width;
-//   margin: 0 auto;
-// }
-
-// %header {
-//   width: $hedaer-width;
-//   margin: 0 auto;
-// }
-
-// %header-flu {
-//   max-width: $hedaer-width;
-//   margin: 0 auto;
-// }
-
-// %header-fix {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-// }
 
 %debug {
   outline: 1px solid #f0f;
+}
+
+.isLandscape {
+  html,
+  body,
+  .wrapper,
+  .maincontent,
+  .content,
+  .current-city,
+  .addition,
+  .menu__search,
+  .menu__city-viewer {
+    height: auto;
+    min-height: auto;
+  }
 }

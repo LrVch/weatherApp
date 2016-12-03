@@ -1,0 +1,44 @@
+.hourly {
+  display: none;
+  padding-bottom: 25px;
+  text-align: center;
+}
+
+.hourly__inner {
+  position: relative;
+  overflow: hidden;
+  height: 41px;
+}
+
+.hourly__slider {
+  @extend %clearfix;
+
+  position: absolute;
+  left: 0;
+  width: 200%;
+  transition: all .3s;
+
+  &.slide {
+    left: -100%;
+  }
+}
+
+.hourly__slide {
+  float: left;
+  width: 12.5%;
+  //min-height: 1px;
+  border-left: 1px solid map-get($clrs, dark);
+
+  &:first-child,
+  &:nth-child(5){
+    border-left-color: transparent;
+  }
+}
+
+.hourly__slide-time {
+  line-height: 25px;
+}
+
+.hourly__slide-temp {
+
+}

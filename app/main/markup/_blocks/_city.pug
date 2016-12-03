@@ -1,0 +1,13 @@
+.city
+    .city__name Toronto, Canada
+    .city__descr
+        .city__descr-main
+            .city__weather Cloudly
+            .city__temp.celcius 18
+        .city__descr-img-wrap
+            img(src="http://openweathermap.org/img/w/10d.png").city__descr-img
+            .city__date 25 November
+    include ./_details.pug
+    include ./_hourly.pug
+
+    a(href="#").city__more more details

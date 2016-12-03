@@ -1,0 +1,45 @@
+.nex-day {
+  display: table;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.nex-day__img-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+  width: 75px;
+}
+
+.nex-day__img {
+  width: 70px;
+}
+
+.nex-day__desc {
+  vertical-align: middle;
+  display: table-cell;
+  font-size: 14px;
+}
+
+.nex-day__date {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.nex-day__weather {
+  text-align: center;
+}
+
+.nex-day__temp {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 22px;
+}
+
+.nex-day__temp-day {
+  margin-bottom: 10px;
+}
+
+.nex-day__temp-hight {
+
+}

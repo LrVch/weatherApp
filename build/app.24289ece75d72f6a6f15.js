@@ -1,1 +1,0 @@
-var app=function(t){function n(r){if(e[r])return e[r].exports;var o=e[r]={exports:{},id:r,loaded:!1};return t[r].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var e={};return n.m=t,n.c=e,n.p="/",n(0)}([function(t,n,e){"use strict";e(1),fetch("/backend/test.json").then(function(t){return t.json()}).then(function(t){})},function(t,n){}]);
