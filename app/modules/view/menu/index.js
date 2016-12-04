@@ -6,11 +6,15 @@ class Menu {
     constructor(elem) {
         this._elem = elem;
 
-        elem.addEventListener("click", this._closeMenu.bind(this));
+        elem.addEventListener("click", this._manager.bind(this));
     }
 
-    _closeMenu(event) {
+    _manager(event) {
         if (event.target.closest(".menu__close")) {
+            this.hide();
+        }
+
+        if (event.target.closest(".menu__overflow")) {
             this.hide();
         }
     }
