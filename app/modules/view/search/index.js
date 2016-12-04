@@ -2,7 +2,7 @@
 
 import TeleportAutocomplete from "./../../../vendors/autocomplete/dist/teleport-autocomplete.min.js";
 import  "./../../../vendors/autocomplete/dist/teleport-autocomplete.min.css";
-import eventMixin from "./../../common/eventMixin"
+import eventMixin from "./../../common/eventMixin";
 
 class Search {
     constructor(elem) {
