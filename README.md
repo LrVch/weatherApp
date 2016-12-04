@@ -4,6 +4,10 @@ $git clone git@github.com:LrVch/weatherApp.git
 
 $git checkout develop
 
+$npm i webpack -g
+
+$npm i node-static -g
+
 $npm i
 
 $npm run devserv - запускает webpack-dev-serve с лайврелоадом, страница будет доступна на localhost:8080/app.html, так же надо запустить локальный сервер командой node serverHot.js => разработка
