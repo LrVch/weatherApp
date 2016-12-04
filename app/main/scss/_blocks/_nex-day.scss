@@ -6,16 +6,28 @@
   padding: 10px;
   background: map-get($clrs, primary);
   box-shadow: $boxShadowPrimary;
+
+  @media #{$screen-md} {
+    display: table-cell;
+  }
 }
 
 .nex-day__img-wrapper {
   display: table-cell;
   vertical-align: middle;
   width: 75px;
+
+  @media #{$screen-md} {
+    display: block;
+    width: auto;
+    margin-bottom: 20px;
+  }
 }
 
 .nex-day__img {
+  display: block;
   width: 70px;
+  margin: 0 auto;
 }
 
 .nex-day__desc {
@@ -26,6 +38,12 @@
   @media #{$screen-sm} {
     font-size: 22px;
     line-height: 24px;
+  }
+
+  @media #{$screen-md} {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
   }
 }
 
@@ -48,6 +66,10 @@
   vertical-align: middle;
   text-align: center;
   font-size: 22px;
+
+  @media #{$screen-md} {
+    display: block;
+  }
 }
 
 .nex-day__temp-day {

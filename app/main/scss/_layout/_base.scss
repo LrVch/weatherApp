@@ -13,22 +13,25 @@ body {
   font-size: $font-base-size;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #f1f1f1;
 }
 
 html {
   position: relative;
 }
 
-body {}
-
 .wrapper,
 .maincontent {
   height: 100%;
   min-height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
+
 
 .maincontent {
   position: relative;
+  background: #f1f1f1;
 }
 
 %debug {
@@ -46,6 +49,17 @@ body {}
   .menu__search,
   .menu__city-viewer {
     height: auto;
-    min-height: auto;
+    min-height: initial;
+  }
+
+  @media #{$screen-md} {
+    html,
+    body,
+    .maincontent,
+    .wrapper,
+    .content {
+      height: 100% !important;
+      min-height: 100% !important;
+    }
   }
 }

@@ -22,7 +22,7 @@
   }
 
   &.show-more-details {
-    height: auto;
+    height: auto !important;
 
     .details {
       width: 100%;
@@ -49,6 +49,10 @@
     .hourly {
       display: block;
     }
+  }
+
+  @media #{$screen-md} {
+    height: 55% !important;
   }
 }
 

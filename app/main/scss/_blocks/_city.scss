@@ -14,8 +14,15 @@
   text-align: right;
 
   @media #{$screen-sm} {
-    padding-top: 20px;
+    padding-top: 10px;
     font-size: 40px;
+    line-height: 42px;
+  }
+
+  @media #{$screen-md} {
+    padding-top: 10px;
+    font-size: 30px;
+    line-height: 32px;
   }
 }
 
@@ -27,6 +34,10 @@
   @media #{$screen-sm} {
     margin-bottom: 30px;
   }
+
+  @media #{$screen-md} {
+    margin-bottom: 10px;
+  }
 }
 
 .city__descr-main {
@@ -36,10 +47,17 @@
 .city__weather {
   margin-bottom: 10px;
   font-size: 26px;
+  line-height: 28px;
 
   @media #{$screen-sm} {
     margin-bottom: 30px;
     font-size: 46px;
+    line-height: 48px;
+  }
+
+  @media #{$screen-md} {
+    font-size: 36px;
+    line-height: 38px;
   }
 }
 
@@ -53,8 +71,13 @@
 
     &.celcius:after {
       font-size: 80px;
-      line-height: 82px;
+      line-height: 60px;
     }
+  }
+
+  @media #{$screen-md} {
+    font-size: 60px;
+    line-height: 62px;
   }
 
 }
@@ -72,6 +95,11 @@
 
   @media #{$screen-sm} {
     width: 200px;
+  }
+
+  @media #{$screen-md} {
+    width: 125px;
+    margin-bottom: -15px;
   }
 }
 

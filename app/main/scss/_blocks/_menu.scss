@@ -5,7 +5,6 @@
   width: 300px;
   height: 100%;
   min-height: 100%;
-  background: #f00;
   transition: left .3s;
 
   &.open {
@@ -20,6 +19,14 @@
     width: 440px;
     left: -440px;
   }
+
+  @media #{$screen-md} {
+    position: relative;
+    left: 0;
+    width: 400px;
+    float: left;
+    padding: 10px;
+  }
 }
 
 .menu__inner {
@@ -29,10 +36,19 @@
   min-height: 100%;
   padding: 0 20px 10px 0;
   background: map-get($clrs, primary);
+  box-shadow: $boxShadowPrimary;
+
+  @media #{$screen-md} {
+    padding-left: 20px;
+  }
 }
 
 .menu__close {
   @include closeBtn(40px, 4px, smooth-gray, 10px, 10px);
+
+  @media #{$screen-md} {
+    display: none;
+  }
 }
 
 .menu__overflow {
@@ -44,16 +60,28 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.6);
   z-index: 10;
+
+  @media #{$screen-md} {
+    display: none !important;
+  }
 }
 
-.menu__search {
+div.menu__search {
   height: 20%;
   padding-top: 65px;
+
+  @media #{$screen-md} {
+    height: 20% !important;
+  }
 }
 
 .menu__city-viewer {
   height: 80%;
   padding-top: 30px;
+
+  @media #{$screen-md} {
+    height: 80% !important;
+  }
 }
 
 .menu__tongue {
@@ -65,4 +93,8 @@
   top: 50%;
   transform: translateY(-50%);
   border-radius: 0 3px 3px 0;
+
+  @media #{$screen-md} {
+    display: none;
+  }
 }

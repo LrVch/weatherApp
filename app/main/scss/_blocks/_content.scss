@@ -8,4 +8,8 @@
     min-height: inherit;
     background: #f1f1f1;
   }
+
+  @media #{$screen-md} {
+    margin-left: 400px;
+  }
 }

@@ -1,14 +1,16 @@
 .city-viewer {
   height: 100%;
   color: rgba(0, 0, 0, .6);
-}
 
+  @media #{$screen-md} {
+    font-size: 22px;
+    line-height: 24px;
+  }
+}
 
 .city-viewer__inner {
   height: inherit;
   overflow: auto;
-  padding-right: 5px;
-  padding-bottom: 5px;
 }
 
 .city-viewer__item {
