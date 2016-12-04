@@ -80,15 +80,21 @@ class CityViewer {
 
         this._selectCity(newActiveElem);
 
-        // TODO
-        // поправить прокрутку в верх при удалени элемента на размере экрана от айпад в горизонте
         setTimeout(() => {
-            if (!document.body.classList.contains("isLandscape")) {
+            this._setScrollTop();
+        }, 0);
+    }
+
+    _setScrollTop() {
+        if (!document.body.classList.contains("isLandscape")) {
+            this._elem.querySelector(SELECTORS.viewerInner).scrollTop = 0;
+        } else {
+            if (document.documentElement.clientWidth >= 1024) {
                 this._elem.querySelector(SELECTORS.viewerInner).scrollTop = 0;
             } else {
                 window.scrollTo(0, 0);
             }
-        }, 0);
+        }
     }
 
     _setActiveClass(elem) {
