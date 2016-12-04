@@ -2,12 +2,21 @@
   display: none;
   padding-bottom: 25px;
   text-align: center;
+
+  @media #{$screen-sm} {
+    font-size: 24px;
+    line-height: 26px;
+  }
 }
 
 .hourly__inner {
   position: relative;
   overflow: hidden;
   height: 41px;
+
+  @media #{$screen-sm} {
+    height: 51px;
+  }
 }
 
 .hourly__slider {

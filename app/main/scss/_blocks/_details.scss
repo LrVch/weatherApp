@@ -2,6 +2,11 @@
   max-width: 60%;
   margin: 0;
   padding: 0;
+
+  @media #{$screen-sm} {
+    font-size: 24px;
+    line-height: 26px;
+  }
 }
 
 .details__item {
@@ -10,6 +15,10 @@
   margin-bottom: 5px;
   list-style-type: none;
   transition: all .3s;
+
+  @media #{$screen-sm} {
+    margin-bottom: 10px;
+  }
 }
 
 .details__item-text {

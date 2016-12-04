@@ -8,18 +8,35 @@
   height: 100%;
   overflow: auto;
   transition: height .3s;
+
+  @media #{$screen-sm} {
+    padding: 10px;
+    padding-bottom: 0;
+  }
 }
 
 .addition__item {
-  //min-height: 100px;
   margin: 0 10px;
   margin-bottom: 10px;
-  padding: 10px;
   list-style-type: none;
-  background: map-get($clrs, primary);
-  box-shadow: $boxShadowPrimary;
 
   &:last-child {
     margin-bottom: 0;
+  }
+
+  @media #{$screen-sm} {
+    width: 50%;
+    float: left;
+    margin: 0;
+    padding-bottom: 20px;
+    height: 33.3333333%;
+
+    &:nth-child(2n) {
+      padding-left: 10px;
+    }
+
+    &:nth-child(2n - 1) {
+      padding-right: 10px;
+    }
   }
 }

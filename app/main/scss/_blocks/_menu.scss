@@ -15,6 +15,11 @@
       display: block;
     }
   }
+
+  @media #{$screen-sm} {
+    width: 440px;
+    left: -440px;
+  }
 }
 
 .menu__inner {

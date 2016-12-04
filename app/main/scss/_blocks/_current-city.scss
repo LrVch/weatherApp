@@ -32,6 +32,10 @@
     .details__item {
       margin-bottom: 10px;
       border-bottom: 1px solid map-get($clrs, dark);
+
+      @media #{$screen-sm} {
+        margin-bottom: 20px;
+      }
     }
 
     .details__hidden {
