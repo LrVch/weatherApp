@@ -58,6 +58,11 @@ cityViewer.on(CityViewer.EVENTS.onDeleteCity, function(geoId) {
     // alert("delete " + geoId);
 });
 
+cityViewer.on(CityViewer.EVENTS.onDeletAllCities, function() {
+    console.log("очистить всю температуру");
+    // alert("delete " + geoId);
+});
+
 cityViewer.addCity({
     name: "Omsk, Russia",
     geoId: 12345

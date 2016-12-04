@@ -73,6 +73,11 @@ class CityViewer {
     _setNewActiveElement() {
         const newActiveElem = this._elem.querySelector(SELECTORS.viewerItem);
 
+        if (!newActiveElem) {
+            this.trigger(this.constructor.EVENTS.onDeletAllCities);
+            return;
+        }
+
         this._selectCity(newActiveElem);
 
         // TODO
@@ -100,7 +105,8 @@ class CityViewer {
     static get EVENTS () {
         return {
             onSelectedCity: "onSelectedCity",
-            onDeleteCity: "onDeleteCity"
+            onDeleteCity: "onDeleteCity",
+            onDeletAllCities: "onDeletAllCities"
         }
     }
 }
