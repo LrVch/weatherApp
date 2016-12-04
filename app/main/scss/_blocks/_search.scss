@@ -1,14 +1,19 @@
 .search {
   height: 30%;
+
+  .tp-ac__item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 }
 
 .search__inner {
-  padding-right: 5px;
+  padding-right: 5px !important;
 }
 
 .search__input {
   width: 100%;
-  padding: 20px;
+  padding: 20px !important;
   border: solid 1px transparent;
   border-radius: 0;
   background-color: #fafafa;

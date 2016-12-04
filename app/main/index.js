@@ -19,16 +19,25 @@ if (NODE_ENV === 'development') {
 
 import "./../modules/view/content";
 import Menu from "./../modules/view/menu";
+import Search from "./../modules/view/search";
 import './../vendors/hammer';
 
 const mainElem = new Hammer(document.body);
 const menu = new Menu(document.querySelector(".menu"));
 
+const search = new Search(document.querySelector(".search"));
+
 
 mainElem.on("swipeleft", function(ev) {
     menu.hide();
 });
+
 mainElem.on("swiperight", function(ev) {
     menu.show();
+});
+
+search.on(Search.EVENTS.onGetCity, function(cityData) {
+    console.log(cityData);
+    alert(`${cityData.name}`);
 });
 
