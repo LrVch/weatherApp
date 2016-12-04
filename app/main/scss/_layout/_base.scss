@@ -46,6 +46,7 @@ html {
   .content,
   .current-city,
   .addition,
+  .menu,
   .menu__search,
   .menu__city-viewer {
     height: auto;
@@ -57,7 +58,8 @@ html {
     body,
     .maincontent,
     .wrapper,
-    .content {
+    .content,
+    .menu {
       height: 100% !important;
       min-height: 100% !important;
     }
