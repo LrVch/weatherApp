@@ -11,3 +11,4 @@ function isLandscape(elem) {
 };
 
 window.addEventListener("resize", isLandscape.bind(window, document.body));
+isLandscape(document.body);
