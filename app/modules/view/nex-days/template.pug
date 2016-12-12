@@ -1,0 +1,12 @@
+ul.addition__list
+    each item in items
+        li.addition__item
+            .nex-day(data-next-day)
+                .nex-day__img-wrapper
+                     img(src=item.img).nex-day__img
+                .nex-day__desc
+                    .nex-day__date=item.data
+                    .nex-day__weather=item.main
+                .nex-day__temp
+                    .nex-day__temp-day.celcius=item.temp.day
+                    .nex-day__temp-hight.celcius=item.temp.night

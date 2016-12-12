@@ -1,5 +1,6 @@
 .details {
-  max-width: 60%;
+  position: relative;
+  //max-width: 60%;
   margin: 0;
   padding: 0;
 
@@ -7,14 +8,41 @@
     font-size: 24px;
     line-height: 26px;
   }
+
+  &.hidden {
+    display: none;
+  }
+
+  &.open {
+    padding-bottom: 4px;
+    margin-bottom: 11px;
+
+    .details__item {
+      margin-bottom: 10px;
+
+      &.datails--more {
+        display: block;
+      }
+
+      @media #{$screen-sm} {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid map-get($clrs, dark);
+      }
+    }
+  }
 }
 
 .details__item {
   @extend %clearfix;
 
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   list-style-type: none;
-  transition: all .3s;
+  //transition: all .1s;
+
+  &.datails--more {
+    display: none;
+  }
 
   @media #{$screen-sm} {
     margin-bottom: 10px;
@@ -23,12 +51,12 @@
 
 .details__item-text {
   float: left;
-  width: 70%;
+  width: 50%;
 }
 
 .details__num {
   float: right;
-  width: 30%;
+  width: 50%;
   text-align: right;
 }
 

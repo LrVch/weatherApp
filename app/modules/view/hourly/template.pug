@@ -1,0 +1,6 @@
+.hourly__inner(data-hourly-inner)
+    .hourly__slider(data-hourly-slider)
+        each slide in slides
+            .hourly__slide
+                .hourly__slide-time=slide.time
+                .hourly__slide-temp.celcius=slide.temp

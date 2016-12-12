@@ -3,10 +3,13 @@
   height: 100%;
   padding: 20px;
   padding-top: 10px;
+  padding-bottom: 30px;
+  overflow: hidden;
 
   @media #{$screen-sm} {
     padding: 40px;
     padding-top: 10px;
+    padding-bottom: 55px;
   }
 }
 
@@ -29,7 +32,7 @@
 .city__descr {
   @extend %clearfix;
 
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 
   @media #{$screen-sm} {
     margin-bottom: 30px;
@@ -37,6 +40,14 @@
 
   @media #{$screen-md} {
     margin-bottom: 10px;
+  }
+}
+
+.city__details {
+  max-width: 65%;
+
+  @media #{$screen-sm} {
+    max-width: 65%;
   }
 }
 
@@ -82,24 +93,28 @@
 
 }
 
-//sup.city__temp-null &#730;
 .city__descr-img-wrap {
   float: right;
+  padding-top: 5px;
   text-align: right;
+
+  @media #{$screen-sm} {
+    padding-top: 15px;
+  }
 }
 
 .city__descr-img {
-  width: 140px;
-  margin-bottom: -25px;
+  width: 100px;
+  //margin-bottom: -15px;
   transition: all .3s;
 
   @media #{$screen-sm} {
-    width: 200px;
+    width: 170px;
   }
 
   @media #{$screen-md} {
     width: 125px;
-    margin-bottom: -15px;
+    //margin-bottom: -15px;
   }
 }
 
@@ -120,11 +135,35 @@
   bottom: 10px;
   right: 20px;
   display: block;
+  padding-top: 10px;
   text-align: right;
   color: map-get($clrs, dark);
 
   @media #{$screen-sm} {
+    padding-top: 80px;
     font-size: 24px;
     line-height: 26px;
   }
+
+  @media #{$screen-md} {
+    padding-top: 70px;
+  }
+}
+
+.city__reload {
+  position: absolute;
+  left: 20px;
+  bottom: 5px;
+  width: 25px;
+
+  @media #{$screen-sm} {
+    width: 40px;
+    left: 35px;
+    bottom: 10px;
+  }
+}
+
+.city__reload-img {
+  max-width: 100%;
+  color: inherit;
 }

@@ -1,5 +1,6 @@
 .addition {
   height: 50%;
+  transition: height .3s;
 
   @media #{$screen-md} {
     height: 45% !important;
@@ -11,6 +12,7 @@
 
   margin: 0;
   padding: 0;
+  padding-bottom: 10px;
   height: 100%;
   overflow: auto;
   transition: height .3s;

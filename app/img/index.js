@@ -1,0 +1,20 @@
+"use strict";
+
+import "./m01d.svg";
+import "./m01n.svg";
+import "./m02d.svg";
+import "./m02n.svg";
+import "./m03d.svg";
+import "./m03n.svg";
+import "./m04d.svg";
+import "./m04n.svg";
+import "./m09d.svg";
+import "./m09n.svg";
+import "./m10d.svg";
+import "./m10n.svg";
+import "./m11d.svg";
+import "./m11n.svg";
+import "./m13d.svg";
+import "./m13n.svg";
+import "./m50d.svg";
+import "./m50n.svg";

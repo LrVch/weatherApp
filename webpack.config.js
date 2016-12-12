@@ -85,7 +85,8 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)$/,
-                loader: addHash('file?name=[path][name].[ext]', 'hash:6')
+                // loader: addHash('file?name=[path][name].[ext]', 'hash:6')
+                loader: 'file?name=[path][name].[ext]'
             }
             // ,
             // {

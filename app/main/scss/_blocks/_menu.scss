@@ -86,13 +86,13 @@ div.menu__search {
 
 .menu__tongue {
   position: absolute;
-  width: 6px;
+  width: 9px;
   height: 100px;
-  background: map-get($clrs, smooth-gray);
-  right: -6px;
+  background: #aaa;
+  right: -9px;
   top: 50%;
   transform: translateY(-50%);
-  border-radius: 0 3px 3px 0;
+  border-radius: 0 5px 5px 0;
 
   @media #{$screen-md} {
     display: none;

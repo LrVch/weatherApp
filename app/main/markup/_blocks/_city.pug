@@ -1,13 +1,17 @@
 .city
-    .city__name Toronto, Canada
+    .city__name(data-city-name) Toronto, Canada
     .city__descr
         .city__descr-main
-            .city__weather Cloudly
-            .city__temp.celcius 18
+            .city__weather(data-city-weather) Cloudly
+            .city__temp.celcius(data-city-temp) 18
         .city__descr-img-wrap
-            img(src="http://openweathermap.org/img/w/10d.png").city__descr-img
-            .city__date 25 November
-    include ./_details.pug
-    include ./_hourly.pug
+            img(src=require("./../../../img/m11d.svg") data-city-img).city__descr-img
+            .city__date(data-city-data) 25 November
+    .city__details(data-details)
+        // include ./_details.pug
+    .city__hourly(data-hourly)
+        // include ./_hourly.pug
 
-    a(href="#").city__more more details
+    a(href="#" data-more-details).city__more more details
+    a(href="#" data-reload-data).city__reload
+        img(src=require("./../../../img/cloud-reload.svg")).city__reload-img

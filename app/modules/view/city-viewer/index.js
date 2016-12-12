@@ -16,6 +16,41 @@ class CityViewer {
 
         elem.addEventListener("click", this._manager.bind(this));
     }
+    
+    getItemHeight() {
+        return this._elem.querySelector(".city-viewer__item").clientHeight;
+    }
+
+    getAllItemsHeight() {
+        const itemsLingth = this.getItemsLength();
+        const itemHeight = this.getItemHeight();
+        const itemMarginBottom = this.getItemMarginBottom();
+        let result = 0;
+
+        for (let i = 0; i < itemsLingth - 1; i++) {
+            result += itemHeight + itemMarginBottom;
+        }
+
+        result += itemHeight;
+
+        return result;
+    }
+
+    getViewerHeight() {
+        return this._elem.clientHeight;
+    }
+
+    getItemMarginBottom() {
+        return parseInt(getComputedStyle(this._elem.querySelector(".city-viewer__item")).marginBottom);
+    }
+
+    getItemsLength() {
+        return this._elem.querySelectorAll(".city-viewer__item").length;
+    }
+
+    isScroll() {
+        return this.getAllItemsHeight() > this.getViewerHeight();
+    }
 
     addCity(cityData) {
         const elem = templateItemCity(cityData);
@@ -28,6 +63,7 @@ class CityViewer {
 
         parent.insertBefore(newElem, parent.firstElementChild);
         this._setActiveClass(newElem);
+        this.trigger(this.constructor.EVENTS.onAddCity, this.isScroll());
     }
 
     _manager(event) {
@@ -106,13 +142,16 @@ class CityViewer {
 
     _onDeleteCity(geoId) {
         this.trigger(this.constructor.EVENTS.onDeleteCity, parseInt(geoId));
+        this.trigger(this.constructor.EVENTS.onDeleteCityGetDimention, this.isScroll());
     }
 
     static get EVENTS () {
         return {
-            onSelectedCity: "onSelectedCity",
-            onDeleteCity: "onDeleteCity",
-            onDeletAllCities: "onDeletAllCities"
+            "onSelectedCity": "onSelectedCity",
+            "onDeleteCity": "onDeleteCity",
+            "onDeletAllCities": "onDeletAllCities",
+            "onDeleteCityGetDimention": "onDeleteCityGetDimention",
+            "onAddCity": "onAddCity"
         }
     }
 }

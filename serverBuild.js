@@ -1,13 +1,13 @@
 var static = require('node-static');
-var file = new static.Server('.');
+var file = new static.Server('./build');
 
 
 require('http').createServer(function (request, response) {
     console.log("in", request.url);
-    if (request.url.indexOf("/app") !== -1) {
-        console.log(request.url);
-        request.url = '/build' + request.url;
-    }
+    // if (request.url.indexOf("/app") !== -1) {
+    //     console.log(request.url);
+    //     request.url = '/build' + request.url;
+    // }
     
     file.serve(request, response);
 }).listen(3000);
