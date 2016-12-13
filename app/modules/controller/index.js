@@ -1,7 +1,7 @@
 'use strict';
 
 // import {log} from './../stuff/logger';
-// import Model from './../model';
+import Model from './../model';
 import View from './../view';
 
 
@@ -77,11 +77,11 @@ const dataMain = {
 
 export default class Controller {
     constructor() {
-        // this._model = new Model();
+        this._model = new Model();
         this._view = new View();
 
-        this._view.nexDays.render(dataDays);
-        this._view.currentCity.details.render(dataDetails, this._view.currentCity.getFreeSpaceFroDetails());
+        // this._view.nexDays.render(dataDays);
+        // this._view.currentCity.details.render(dataDetails, this._view.currentCity.getFreeSpaceFroDetails());
         // this._view.currentCity.render(dataMain);
 
         this._view.on(View.EVENTS.resizeWindow, () => {
@@ -90,17 +90,27 @@ export default class Controller {
             }
         });
 
-        this._view.currentCity.on(View.EVENTS.CurrentCity.onShowMoreDetails, value => {
+        this._view.currentCity.on(View.EVENTS.CurrentCity.onShowMoreDetails, () => {
             this._view.currentCity.hourly.render(this._getDataForHourlyView());
         });
 
-        this._view.currentCity.on(View.EVENTS.CurrentCity.onHideMoreDetails, value => {
+        this._view.currentCity.on(View.EVENTS.CurrentCity.onHideMoreDetails, () => {
             this._view.currentCity.hourly.destroy();
         });
 
-        this._view.search.on(View.EVENTS.Search.onGetCity, function (cityData) {
-            console.log(cityData);
-            alert(`${cityData.name}`);
+        this._view.search.on(View.EVENTS.Search.onGetCity, (cityData) => {
+            // console.log(cityData);
+            const city = {};
+
+            try {
+                city.id = cityData.geonameId;
+                city.name = cityData.name;
+            } catch (e) {
+                console.log(e);
+                return;
+            }
+
+            this._model.getData(city);
         });
 
         this._view.cityViewer.on(View.EVENTS.CityViewer.onSelectedCity, function (geoId) {
@@ -118,10 +128,10 @@ export default class Controller {
             // alert("delete " + geoId);
         });
 
-        this._view.cityViewer.addCity({
-            name: "Omsk, Russia",
-            geoId: 12345
-        });
+        // this._view.cityViewer.addCity({
+        //     name: "Omsk, Russia",
+        //     geoId: 12345
+        // });
 
     }
 
