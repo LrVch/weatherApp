@@ -22,5 +22,9 @@ export default class NexDays {
     render(data) {
         this._elem.innerHTML = template({items: data});
     }
+
+    destroy() {
+        this._elem.innerHTML = "";
+    }
 }
 

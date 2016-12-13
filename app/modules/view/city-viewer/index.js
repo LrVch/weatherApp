@@ -2,6 +2,7 @@
 
 import eventMixin from "./../../common/eventMixin";
 import templateItemCity from './item-city.pug';
+import templateListItems from './list-items-template.pug';
 
 const SELECTORS = {
     closeButton: "[data-city-viewer-item-close]",
@@ -18,7 +19,7 @@ class CityViewer {
     }
     
     getItemHeight() {
-        return this._elem.querySelector(".city-viewer__item").clientHeight;
+        return this._elem.querySelector(SELECTORS.viewerItem).clientHeight;
     }
 
     getAllItemsHeight() {
@@ -41,11 +42,11 @@ class CityViewer {
     }
 
     getItemMarginBottom() {
-        return parseInt(getComputedStyle(this._elem.querySelector(".city-viewer__item")).marginBottom);
+        return parseInt(getComputedStyle(this._elem.querySelector(SELECTORS.viewerItem)).marginBottom);
     }
 
     getItemsLength() {
-        return this._elem.querySelectorAll(".city-viewer__item").length;
+        return this._elem.querySelectorAll(SELECTORS.viewerItem).length;
     }
 
     isScroll() {
@@ -64,6 +65,13 @@ class CityViewer {
         parent.insertBefore(newElem, parent.firstElementChild);
         this._setActiveClass(newElem);
         this.trigger(this.constructor.EVENTS.onAddCity, this.isScroll());
+    }
+
+    addListOfCities(citiesData) {
+        const html = templateListItems({cities: citiesData});
+        const parent = this._elem.querySelector(SELECTORS.viewerInner);
+
+        parent.insertAdjacentHTML("afterbegin", html);
     }
 
     _manager(event) {
@@ -142,7 +150,11 @@ class CityViewer {
 
     _onDeleteCity(geoId) {
         this.trigger(this.constructor.EVENTS.onDeleteCity, parseInt(geoId));
-        this.trigger(this.constructor.EVENTS.onDeleteCityGetDimention, this.isScroll());
+
+        if (this.getItemsLength() > 0) {
+            this.trigger(this.constructor.EVENTS.onDeleteCityGetDimention, this.isScroll());
+        }
+
     }
 
     static get EVENTS () {

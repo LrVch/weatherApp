@@ -21,14 +21,7 @@ if (NODE_ENV === 'development') {
  logic
 */
 
-// const cities = {
-//     1489425: {name: "tomsk", id: 14894252},
-//     6167865: {name: "toronto", id: 6167865}
-// };
-
 import Controller from "./../modules/controller";
 
 export const controller = new Controller();
-
-// controller._model.getData(cities["1489425"]);
 

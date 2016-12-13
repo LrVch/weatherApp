@@ -37,10 +37,6 @@ export default class View {
             }
         });
 
-        this.currentCity.on(CurrentCity.EVENTS.onReloadDataRequest, event => {
-            alert("reload");
-        });
-
         this.currentCity.on(CurrentCity.EVENTS.onShowMoreDetails, event => {
             this.menu.disable();
         });
@@ -76,7 +72,7 @@ export default class View {
         });
 
         this._mainElement.on("swipeleft", (ev) => {
-            console.log("swipe")
+            // console.log("swipe")
             if (!ev.target.closest(".menuSwipe")) {
                 return;
             }
@@ -94,6 +90,14 @@ export default class View {
 
         this._addLandClass(document.body);
         this._enableDisableMenu();
+    }
+
+    showPreloader() {
+        document.querySelector(".preloader").classList.add("show");
+    }
+
+    hidePreloader() {
+        document.querySelector(".preloader").classList.remove("show");
     }
 
     _enableDisableMenu() {

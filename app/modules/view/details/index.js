@@ -48,7 +48,7 @@ export default class Details {
         this._elem.innerHTML = template({items: data, freeSpace: col});
 
 
-        console.log(col);
+        // console.log(col);
         // console.log(freeSpace);
         // console.log(freeSpace / itemHeight);
     }

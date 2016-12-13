@@ -97,6 +97,10 @@ export default class CurrentCity {
         this._elem.classList.remove("init");
     }
 
+    destroy() {
+        this._elem.classList.add("init");
+    }
+
     render(data) {
         this._elem.querySelector("[data-city-img]").src = data.img;
         this._elem.querySelector("[data-city-data]").innerHTML = data.data;
@@ -171,19 +175,13 @@ export default class CurrentCity {
             if (this._elem.classList.contains("small")) {
                 this.details.hide();
             }
-
             this._elem.addEventListener("transitionend", function me(event) {
                 self._elem.classList.remove("show-more-details");
                 self._elem.removeEventListener("transitionend", me);
                 self.details.hideMore();
+                self.trigger(self.constructor.EVENTS.onHiddenMoreDetails, "");
+                elem.innerHTML = "more details";
             });
-
-            // if (!this._isLandscape()) {
-            //     this._elem.classList.add("vertical");
-            // }
-
-            elem.innerHTML = "more details";
-
         }
     }
 
@@ -245,6 +243,7 @@ export default class CurrentCity {
             "onAnimationEnd": "onAnimationEnd",
             "onShowMoreDetails": "onShowMoreDetails",
             "onHideMoreDetails": "onHideMoreDetails",
+            "onHiddenMoreDetails": "onHiddenMoreDetails",
             "onReloadDataRequest": "onReloadDataRequest",
             Hourly: Hourly.EVENTS
         }
