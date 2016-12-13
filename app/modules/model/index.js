@@ -13,8 +13,6 @@ export default class Model {
 
         this._fetchdata.on(FetchData.EVENTS.onDataFetched, this.dataHandler.bind(this));
         this._fetchdata.on(FetchData.EVENTS.onDataFetchError, this.hadnleError.bind(this));
-
-        console.log(this._transformId(125));
     }
 
     _getUrls(city, api) {
@@ -40,7 +38,13 @@ export default class Model {
 
 
         if (!this._cityIsExist(data[0].id)) {
-            this._addCityToDb({name: data[0].name, id: data[0].id});
+            this._addCityToDb(
+                {
+                    name: data[0].name,
+                    id: data[0].id,
+                    weight: this._setWeight()
+                }
+            );
             this._setActiveCity(data[0].id);
             this.trigger(Model.EVENTS.onAddCity, {
                 name: data[0].name,
@@ -80,13 +84,26 @@ export default class Model {
         this._db.cities[data.id] = {
             name: data.name,
             id: data.id,
-            active: true
+            active: true,
+            weight: data.weight
         }
     }
 
-     _transformId(id) {
-        const mask = "__"
-        return `${mask}${id}`;
+    _setWeight() {
+        const citiesKeys = Object.keys(this._db.cities);
+        const cities = this._db.cities;
+
+        if (citiesKeys.length === 0) {
+            return 0;
+        }
+
+        const weights = [];
+
+        for (let i = 0; i < citiesKeys.length; i++) {
+            weights.push(cities[citiesKeys[i]].weight);
+        }
+
+        return Math.min(...weights) - 1;
     }
 
     _writeDataForMain(data) {
@@ -167,9 +184,9 @@ export default class Model {
     _restoreData() {
         const data = this._db.cities;
         const dataAsArray = this._transformDataFromObjToArray(data);
+        const sortByWeightToTop = dataAsArray.slice().sort((a, b) => a.weight > b.weight);
 
-        this.trigger(Model.EVENTS.onAddListOfCities, dataAsArray);
-
+        this.trigger(Model.EVENTS.onAddListOfCities, sortByWeightToTop);
         this.getData(this._getActiveCity());
     }
 
