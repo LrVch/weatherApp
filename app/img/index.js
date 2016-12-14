@@ -18,3 +18,4 @@ import "./m13d.svg";
 import "./m13n.svg";
 import "./m50d.svg";
 import "./m50n.svg";
+import "./wheel.svg";

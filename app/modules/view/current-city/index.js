@@ -102,12 +102,17 @@ export default class CurrentCity {
     }
 
     render(data) {
-        this._elem.querySelector("[data-city-img]").src = data.img;
-        this._elem.querySelector("[data-city-data]").innerHTML = data.data;
-        this._elem.querySelector("[data-city-name]").innerHTML = data.name;
-        this._elem.querySelector("[data-city-weather]").innerHTML = data.weather;
-        this._elem.querySelector("[data-city-temp]").innerHTML = data.temp;
+        return new Promise((resolve, reject) => {
+            this._elem.querySelector("[data-city-img]").src = data.img;
+            this._elem.querySelector("[data-city-data]").innerHTML = data.data;
+            this._elem.querySelector("[data-city-name]").innerHTML = data.name;
+            this._elem.querySelector("[data-city-weather]").innerHTML = data.weather;
+            this._elem.querySelector("[data-city-temp]").innerHTML = data.temp;
 
+            this._elem.querySelector("[data-city-img]").onload = () => {
+                resolve();
+            };
+        });
     }
 
     isSmallSize() {

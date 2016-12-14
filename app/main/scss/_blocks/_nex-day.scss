@@ -65,7 +65,7 @@
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  font-size: 22px;
+  font-size: 26px;
 
   @media #{$screen-md} {
     display: block;
@@ -73,7 +73,7 @@
 }
 
 .nex-day__temp-day {
-  margin-bottom: 10px;
+  //margin-bottom: 10px;
 }
 
 .nex-day__temp-hight {

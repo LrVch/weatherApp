@@ -21,16 +21,20 @@ export default class View {
         this.search = new Search(document.querySelector("[data-search]"));
         this.cityViewer = new CityViewer(document.querySelector("[data-city-viewer]"));
 
-        this.cityViewer.on(CityViewer.EVENTS.onDeleteCityGetDimention, isScroll => {
-            if (isScroll) {
+        this.cityViewer.on(CityViewer.EVENTS.onDeleteCityGetDimention, isScrollOnDelete => {
+            if (isScrollOnDelete) {
                 this.menu.setOffsetMargin();
             } else {
                 this.menu.removeOffsetMargin();
             }
         });
 
-        this.cityViewer.on(CityViewer.EVENTS.onAddCity, isScroll => {
-            if (isScroll) {
+        this.cityViewer.on(CityViewer.EVENTS.isScroll, () => {
+                this.menu.setOffsetMargin();
+        });
+
+        this.cityViewer.on(CityViewer.EVENTS.onAddCity, isScrollOnAdd => {
+            if (isScrollOnAdd) {
                 this.menu.setOffsetMargin();
             } else {
                 this.menu.removeOffsetMargin();
@@ -98,6 +102,14 @@ export default class View {
 
     hidePreloader() {
         document.querySelector(".preloader").classList.remove("show");
+    }
+
+    showWelcomeScreen() {
+        document.querySelector(".welcome-screen").classList.add("show");
+    }
+
+    hideWelcomeScreen() {
+        document.querySelector(".welcome-screen").classList.remove("show");
     }
 
     _enableDisableMenu() {

@@ -55,7 +55,11 @@ module.exports = {
     // resolve для модулей
     resolve: {
         modulesDirectories: ["node_modules"], // если путь к модулю указан как 'home' то будет стандартный поиск в node_modules
-        extensions: ["", ".js"]
+        extensions: ["", ".js"],
+        alias: {
+            'es6-promise': 'es6-promise/dist/es6-promise',
+            'fetch': 'whatwg-fetch/fetch'
+        }
     },
     // resolve для лоадеров
     resolveLoader: {
@@ -85,8 +89,8 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)$/,
-                // loader: addHash('file?name=[path][name].[ext]', 'hash:6')
-                loader: 'file?name=[path][name].[ext]'
+                loader: addHash('file?name=[path][name].[ext]', 'hash:6')
+                // loader: 'file?name=[path][name].[ext]'
             }
             // ,
             // {
@@ -116,6 +120,10 @@ module.exports = {
             allChunks: true, // для того чтоб стили выносились отовсюду, даже из require.ensure
                             // в таком случае первый аргументв в ловдере у ExtractTextPlugin ненужен!!
             disable: NODE_ENV === "development"
+        }),
+        new webpack.ProvidePlugin({
+            'Promise': 'es6-promise',
+            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
         }),
         new HtmlWebpackPlugin({
             filename: 'app.html',

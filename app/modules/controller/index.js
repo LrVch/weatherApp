@@ -63,10 +63,10 @@ const dataDetails = [
 const dataHourly = [
     {time: "11:00", temp: 22},
     {time: "12:00", temp: 22},
-    {time: "13:00", temp: 22},
-    {time: "14:00", temp: 22},
-    {time: "15:00", temp: 22},
-    {time: "16:00", temp: 22}
+    // {time: "13:00", temp: 22},
+    // {time: "14:00", temp: 22},
+    // {time: "15:00", temp: 22},
+    // {time: "16:00", temp: 22}
 ];
 const dataMain = {
     name: "Boston, USA",
@@ -81,33 +81,43 @@ export default class Controller {
         this._model = new Model();
         this._view = new View();
 
-        // this._view.nexDays.render(dataDays);
-        // this._view.currentCity.details.render(dataDetails, this._view.currentCity.getFreeSpaceFroDetails());
-        // this._view.currentCity.render(dataMain);
-
         this._model.on(Model.EVENTS.onDataReady, (data) => {
-            this._view.currentCity.render(data.main);
-            this._view.currentCity.details.render(data.details, this._view.currentCity.getFreeSpaceFroDetails());
-            this._view.currentCity.init();
-            this._view.nexDays.render(data.days);
+            this._view.currentCity.render(data.main)
+                .then(resolve => {
+                    this._view.currentCity.details.render(data.details, this._view.currentCity.getFreeSpaceFroDetails());
+                    this._view.nexDays.render(data.days);
+                    this._view.hidePreloader();
+                    this._view.hideWelcomeScreen();
+                    this._view.currentCity.init();
+                    this._view.cityViewer.hidePreloaderOnCity(document.querySelector("[data-geoid = '" + data.id + "']"));
+                    this._view.cityViewer.unlockViewer();
+                    this._view.menu.enable();
+                })
+                .catch(error => {
+                    throw new Error(error);
+                })
+        });
+
+        this._model.on(Model.EVENTS.onRestoreDataBegin, () => {
+            this._view.showPreloader();
+            this._view.menu.disable();
+        });
+
+        this._model.on(Model.EVENTS.onEmptyStorage, () => {
+            this._view.showWelcomeScreen();
         });
         
         this._model.on(Model.EVENTS.onAddCity, (data) => {
-
-            this._view.cityViewer.addCity({name: data.name, geoId: data.id});
-            // setTimeout(() => {
-            //     this._view.hidePreloader();
-            // }, 0);
+            // console.log(data)
+            this._view.cityViewer.addCity({name: data.name, geoId: data.id, tzOffsetMinutes: data.tzOffsetMinutes});
         });
 
         this._model.on(Model.EVENTS.onSetActiveCity, (data) => {
             this._view.cityViewer._setActiveClass(document.querySelector("[data-geoid = '" + data.id + "']"));
-            // setTimeout(() => {
-            //     this._view.menu.hide();
-            // }, 500);
         });
         
         this._model.on(Model.EVENTS.onAddListOfCities, (data) => {
+            // console.log(data)
             this._view.cityViewer.addListOfCities(data);
         });
 
@@ -133,6 +143,12 @@ export default class Controller {
         });
         
         this._view.currentCity.on(View.EVENTS.CurrentCity.onShowMoreDetails, () => {
+            if (!this._getDataForHourlyView().length) {
+                this._view.currentCity.hourly.renderNA();
+
+                return;
+            }
+
             this._view.currentCity.hourly.render(this._getDataForHourlyView());
         });
 
@@ -144,15 +160,18 @@ export default class Controller {
 
         this._view.search.on(View.EVENTS.Search.onGetCity, (cityData) => {
             const city = {};
+            // console.log(cityData)
 
             try {
                 city.id = cityData.geonameId;
+                city.tzOffsetMinutes = cityData.tzOffsetMinutes;
             } catch (e) {
                 console.log(e);
                 return;
             }
 
             this._model.getDataForNewCity(city);
+            this._view.cityViewer.lockViewer();
 
             // this._view.showPreloader();
             // setTimeout(() => {
@@ -163,10 +182,11 @@ export default class Controller {
         
 
 
-        this._view.cityViewer.on(View.EVENTS.CityViewer.onSelectedCity, (geoId) => {
-            // console.log(geoId);
-            this._model.getDataForNewCity({id: geoId});
-            
+        this._view.cityViewer.on(View.EVENTS.CityViewer.onSelectedCity, (data) => {
+            // console.log(data);
+            this._model.getDataForNewCity({id: data.geoId, tzOffsetMinutes: data.tzOffsetMinutes});
+            this._view.cityViewer.showPreloaderOnCity(document.querySelector("[data-geoid = '" + data.geoId + "']"));
+            this._view.cityViewer.lockViewer();
         });
 
         this._view.cityViewer.on(View.EVENTS.CityViewer.onDeleteCity, (geoId) => {
@@ -177,7 +197,7 @@ export default class Controller {
             console.log("очистить всю температуру");
             this._view.currentCity.destroy();
             this._view.nexDays.destroy();
-            // this._model.clearLocalStorage();
+            this._view.showWelcomeScreen();
         });
 
 
@@ -185,6 +205,6 @@ export default class Controller {
     }
 
     _getDataForHourlyView() {
-        return dataHourly;
+        return this._model._db.activeCity.hourly;
     }
 }

@@ -8,7 +8,7 @@ class Menu {
 
         elem.addEventListener("click", this._manager.bind(this));
 
-        this.setOffsetMargin();
+        // this.setOffsetMargin();
     }
 
     setOffsetMargin() {

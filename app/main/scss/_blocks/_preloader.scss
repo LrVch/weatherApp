@@ -1,13 +1,13 @@
 .preloader {
   display: none;
-  position: fixed;
+  position: absolute;
+  width: 200px;
+  height: 200px;
   z-index: 20;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  background-image: url("#{$dir}/preloader.gif");
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url("#{$dir}/wheel.svg");
   background-position: center center;
   background-repeat: no-repeat;
 

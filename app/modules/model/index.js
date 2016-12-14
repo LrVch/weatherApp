@@ -2,7 +2,6 @@
 
 import db from  "./db";
 import FetchData from  "./fetchData";
-// import {log} from  "./../stuff/logger";
 import eventMixin from "./../common/eventMixin";
 
 
@@ -13,12 +12,16 @@ export default class Model {
 
         this._fetchdata.on(FetchData.EVENTS.onDataFetched, this.dataHandler.bind(this));
         this._fetchdata.on(FetchData.EVENTS.onDataFetchError, this.hadnleError.bind(this));
+
+        this.tzOffsetMinutes = 0;
     }
 
     _getUrls(city, api) {
         return [
-            api.url + api.weather + "?id=" + city.id + "&units=metric" + "&APPID=" + api.appid,
-            api.url + api.forecast + "?id=" + city.id + "&units=metric" + "&APPID=" + api.appid
+            // api.url + api.weather + "?id=" + city.id + "&units=metric" + "&APPID=" + api.appid,
+            api.cross + api.url + api.weather + "?id=" + city.id + "&units=metric" + "&APPID=" + api.appid,
+             // api.url + api.forecast + "?id=" + city.id + "&units=metric" + "&APPID=" + api.appid
+            api.cross + api.url + api.forecast + "?id=" + city.id + "&units=metric" + "&APPID=" + api.appid
         ]
     }
 
@@ -28,13 +31,15 @@ export default class Model {
 
     getDataForNewCity(city) {
         this.getData(city);
+        this.tzOffsetMinutes = city.tzOffsetMinutes;
     }
 
     dataHandler(data) {
-        console.log(data);
+        console.log("fetched data", data);
 
         this._writeDataForMain(data);
         this._writeDataForDetails(data);
+        this._transformData(data);
 
 
         if (!this._cityIsExist(data[0].id)) {
@@ -42,13 +47,16 @@ export default class Model {
                 {
                     name: data[0].name,
                     id: data[0].id,
-                    weight: this._setWeight()
+                    active: true,
+                    weight: this._setWeight(),
+                    tzOffsetMinutes: this.tzOffsetMinutes
                 }
             );
             this._setActiveCity(data[0].id);
             this.trigger(Model.EVENTS.onAddCity, {
                 name: data[0].name,
-                id: data[0].id
+                id: data[0].id,
+                tzOffsetMinutes: this.tzOffsetMinutes
             });
             this.trigger(Model.EVENTS.onDataReady, this._db.activeCity);
         } else {
@@ -81,12 +89,14 @@ export default class Model {
     }
 
     _addCityToDb(data) {
-        this._db.cities[data.id] = {
-            name: data.name,
-            id: data.id,
-            active: true,
-            weight: data.weight
-        }
+        // this._db.cities[data.id] = {
+        //     name: data.name,
+        //     id: data.id,
+        //     active: true,
+        //     weight: data.weight,
+        //     tzOffsetMinutes: this.tzOffsetMinutes
+        // }
+        this._db.cities[data.id] = data;
     }
 
     _setWeight() {
@@ -111,6 +121,7 @@ export default class Model {
         const main = data[0];
 
         activeCity.id = main.id;
+        activeCity.tzOffsetMinutes = this.tzOffsetMinutes;
         activeCity.main.name = main.name;
         activeCity.main.weather = main.weather[0].main;
         activeCity.main.temp = Math.round(main.main.temp);
@@ -118,7 +129,8 @@ export default class Model {
             day: "numeric",
             month: "short"
         });
-        activeCity.main.img = `/img/${this._db.transformIcons(main.weather[0].icon)}.svg`;
+        // activeCity.main.img = `/img/${this._db.transformIcons(main.weather[0].icon)}.svg`;
+        activeCity.main.img = `img/${this._db.transformIcons(main.weather[0].icon)}.svg`;
     }
 
     _writeDataForDetails(data) {
@@ -129,17 +141,113 @@ export default class Model {
         details.push([getDetailsUnits("pressure").str, Math.round(main.main.pressure), getDetailsUnits("pressure").unit]);
         details.push([getDetailsUnits("humidity").str, Math.round(main.main.humidity), getDetailsUnits("humidity").unit]);
         details.push([getDetailsUnits("wind").str, Math.round(main.wind.speed), getDetailsUnits("wind").unit]);
-        details.push(["Sunrise", new Date(+(main.sys.sunrise + "000")).toLocaleString("en-US", {
+        details.push(["Sunrise", new Date(+(main.sys.sunrise + "000")).toLocaleString("ru", {
             timezone: 'UTC',
             hour: "numeric",
             minute: "numeric"
         })]);
-        details.push(["Sunset", new Date(+(main.sys.sunset + "000")).toLocaleString("en-US", {
+        details.push(["Sunset", new Date(+(main.sys.sunset + "000")).toLocaleString("ru", {
             hour: "numeric",
             minute: "numeric"
         })]);
 
         this._db.activeCity.details = details;
+    }
+
+    _transformData(data) {
+        const dataDays = data[1].list;
+        const days = {};
+
+        for(let day of dataDays) {
+            let date = new Date(+(day.dt + "000"));
+            let keyTime = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+
+            if (!days[keyTime]) {
+                days[keyTime] = [];
+            }
+            days[keyTime].push(day);
+        }
+
+        const todayHourly = days[new Date().toISOString().split("T")[0]];
+        // console.log(todayHourly)
+        this._writeDataForTodayHourly(todayHourly);
+
+
+        const daysKeys = (todayHourly) ? Object.keys(days).slice(1) : Object.keys(days);
+        const nextDays = [];
+
+        for(let day of daysKeys) {
+            nextDays.push(days[day]);
+        }
+
+        // console.log(nextDays);
+        this._writeDataForNextDays(nextDays);
+
+        // console.log(dataDays);
+    }
+
+    _writeDataForTodayHourly(data) {
+        const hourly = [];
+        // console.log(data)
+
+        if (!data) {
+            return;
+        }
+
+        for(let hour of data) {
+            hourly.push({
+                time: new Date(+(hour.dt + "000")).toLocaleString("RU", {
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    timezone: 'UTC'
+                }),
+                temp: parseInt(hour.main.temp)
+            })
+        }
+
+        this._db.activeCity.hourly = hourly;
+    }
+
+    _writeDataForNextDays(data) {
+        const days = [];
+
+        for(let day of data) {
+            days.push({
+                hourly: {},
+                img: `img/${this._db.transformIcons( this._getCurentDataForNextDay("weather.0.icon", day).slice(0, -1) + "d" )}.svg`,
+                data: new Date(+(day[0].dt + "000")).toLocaleString("en-US", {
+                    day: "numeric",
+                    month: "short"
+                }),
+                main: this._getCurentDataForNextDay("weather.0.main", day),
+                temp: {
+                    day: Math.round(this._getCurentDataForNextDay("main.temp", day))
+                }
+            });
+        }
+
+        console.log(data)
+
+        this._db.activeCity.days = days;
+    }
+
+    _getCurentDataForNextDay(prop, day) {
+        function gotObj(prop, obj) {
+            let traceProp = prop.split(".");
+            let res = obj[traceProp[0]];
+
+            if (!res) {
+                throw new Error("There is no such property");
+            }
+
+            if (traceProp.length > 1) {
+                return gotObj(traceProp.slice(1).join("."), res);
+            } else {
+                return res;
+            }
+        }
+
+        return day[4] ? gotObj(prop, day[4]) : gotObj(prop, day[day.length - 1]);
     }
 
     hadnleError(error) {
@@ -162,7 +270,10 @@ export default class Model {
             this._db.cities = cities;
 
             this._restoreData();
-            console.log(this._db);
+            this.trigger(Model.EVENTS.onRestoreDataBegin);
+            // console.log(this._db);
+        } else {
+            this.trigger(Model.EVENTS.onEmptyStorage);
         }
     }
 
@@ -232,6 +343,8 @@ export default class Model {
             "onAddCity": "onAddCity",
             "onSetActiveCity": "onSetActiveCity",
             "onAddListOfCities": "onAddListOfCities",
+            "onRestoreDataBegin": "onRestoreDataBegin",
+            "onEmptyStorage": "onEmptyStorage",
             FetchData: FetchData.EVENTS
         }
     }

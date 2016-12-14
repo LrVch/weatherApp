@@ -14,7 +14,7 @@ export default class FetchData {
 
         urls.forEach(function(url) {
             chain = chain
-                .then(() => fetch(url))
+                .then(() => fetch(url, {mode: "cors"}))
                 .then((response) => {
                     if (response.status !== 200) {
                         const error = new Error(response.statusText);

@@ -12,12 +12,21 @@ const SELECTORS = {
 };
 
 class CityViewer {
-    constructor (elem) {
+    constructor(elem) {
         this._elem = elem;
 
         elem.addEventListener("click", this._manager.bind(this));
+
+
+        this.on("onAddedListOfCities", () => {
+            if (this.isScroll()) {
+                this.trigger(this.constructor.EVENTS.isScroll);
+            } else {
+                this.trigger(this.constructor.EVENTS.noScroll);
+            }
+        });
     }
-    
+
     getItemHeight() {
         return this._elem.querySelector(SELECTORS.viewerItem).clientHeight;
     }
@@ -28,13 +37,37 @@ class CityViewer {
         const itemMarginBottom = this.getItemMarginBottom();
         let result = 0;
 
-        for (let i = 0; i < itemsLingth - 1; i++) {
+        for (let i = 0; i < itemsLingth; i++) {
             result += itemHeight + itemMarginBottom;
         }
 
         result += itemHeight;
 
         return result;
+    }
+
+    showPreloader() {
+
+    }
+
+    hidePreloader() {
+
+    }
+
+    showPreloaderOnCity(elem) {
+        elem.classList.add("show-preloader");
+    }
+
+    hidePreloaderOnCity(elem) {
+        elem.classList.remove("show-preloader");
+    }
+
+    lockViewer() {
+        this._elem.classList.add("blocked");
+    }
+
+    unlockViewer() {
+        this._elem.classList.remove("blocked");
     }
 
     getViewerHeight() {
@@ -49,11 +82,20 @@ class CityViewer {
         return this._elem.querySelectorAll(SELECTORS.viewerItem).length;
     }
 
+    isScrollOnAdd() {
+        return this.getAllItemsHeight() > this.getViewerHeight();
+    }
+
     isScroll() {
         return this.getAllItemsHeight() > this.getViewerHeight();
     }
 
+    isScrollOnDelete() {
+        return this.getAllItemsHeight() > this.getViewerHeight();
+    }
+
     addCity(cityData) {
+        // console.log(cityData)
         const elem = templateItemCity(cityData);
         const div = document.createElement("div");
 
@@ -64,7 +106,7 @@ class CityViewer {
 
         parent.insertBefore(newElem, parent.firstElementChild);
         this._setActiveClass(newElem);
-        this.trigger(this.constructor.EVENTS.onAddCity, this.isScroll());
+        this.trigger(this.constructor.EVENTS.onAddCity, this.isScrollOnAdd());
     }
 
     addListOfCities(citiesData) {
@@ -72,6 +114,8 @@ class CityViewer {
         const parent = this._elem.querySelector(SELECTORS.viewerInner);
 
         parent.insertAdjacentHTML("afterbegin", html);
+
+        this.trigger(this.constructor.EVENTS.onAddedListOfCities);
     }
 
     _manager(event) {
@@ -96,9 +140,13 @@ class CityViewer {
 
     _selectCity(item) {
         const geoId = item.getAttribute("data-geoId");
+        const tzOffsetMinutes = item.getAttribute("data-tzOffsetMinutes");
 
         this._setActiveClass(item);
-        this.trigger(this.constructor.EVENTS.onSelectedCity, parseInt(geoId));
+        this.trigger(this.constructor.EVENTS.onSelectedCity, {
+            geoId,
+            tzOffsetMinutes
+        });
     }
 
     _deleteCity(elemClose) {
@@ -107,7 +155,7 @@ class CityViewer {
 
         elem.parentNode.removeChild(elem);
 
-        if (elem.classList.contains(SELECTORS.activeClass)){
+        if (elem.classList.contains(SELECTORS.activeClass)) {
             this._setNewActiveElement();
         }
 
@@ -152,18 +200,21 @@ class CityViewer {
         this.trigger(this.constructor.EVENTS.onDeleteCity, parseInt(geoId));
 
         if (this.getItemsLength() > 0) {
-            this.trigger(this.constructor.EVENTS.onDeleteCityGetDimention, this.isScroll());
+            this.trigger(this.constructor.EVENTS.onDeleteCityGetDimention, this.isScrollOnDelete());
         }
 
     }
 
-    static get EVENTS () {
+    static get EVENTS() {
         return {
             "onSelectedCity": "onSelectedCity",
             "onDeleteCity": "onDeleteCity",
             "onDeletAllCities": "onDeletAllCities",
             "onDeleteCityGetDimention": "onDeleteCityGetDimention",
-            "onAddCity": "onAddCity"
+            "onAddCity": "onAddCity",
+            "isScroll": "isScroll",
+            "noScroll": "noScroll",
+            "onAddedListOfCities": "onAddedListOfCities"
         }
     }
 }

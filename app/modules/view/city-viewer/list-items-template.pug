@@ -1,3 +1,3 @@
 each city in cities
-    div(data-geoId= city.id data-city-viewer-item class="city-viewer__item " + ((city.active) ? "active" : ""))= city.name
+    div(data-geoId= city.id data-city-viewer-item data-tzOffsetMinutes= city.tzOffsetMinutes class="city-viewer__item " + ((city.active) ? "active" : ""))= city.name
         a(href="#").city-viewer__item-close(data-city-viewer-item-close)

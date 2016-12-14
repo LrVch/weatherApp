@@ -2,6 +2,7 @@
 
 import "./../../../vendors/hammer";
 import template from './template.pug';
+import templateNA from './templateNA.pug';
 import eventMixin from "./../../common/eventMixin";
 
 export default class Hourly {
@@ -13,11 +14,19 @@ export default class Hourly {
         this._swipeElem = new Hammer(this._elem, {domEvents: true});
 
         this._swipeElem.on("swipeleft", (ev) => {
+            if(this._getLengthOfItems() < 4) {
+                return;
+            }
+
             this._slider.classList.add("slide");
             this.trigger(this.constructor.EVENTS.onSwipeLeft, "");
         });
 
         this._swipeElem .on("swiperight", (ev) => {
+            if(this._getLengthOfItems() < 4) {
+                return;
+            }
+
             this._slider.classList.remove("slide");
             this.trigger(this.constructor.EVENTS.onSwipeRight, "");
         });
@@ -25,6 +34,10 @@ export default class Hourly {
         this._swipeElem .on("swipe", (ev) => {
             this.trigger(this.constructor.EVENTS.onSwipe, "");
         });
+    }
+
+    _getLengthOfItems() {
+        return this._elem.querySelectorAll(".hourly__slide").length;
     }
 
     render(data) {
@@ -40,6 +53,18 @@ export default class Hourly {
             }, 50);
         }, 0);
 
+    }
+
+    renderNA() {
+        this._elem.innerHTML = templateNA();
+        this.trigger(this.constructor.EVENTS.onRender, "");
+        
+        setTimeout(() => {
+            this._elem.classList.add("shown");
+            setTimeout(() => {
+                this._elem.classList.add("shown-slider");
+            }, 50);
+        }, 0);
     }
 
     destroy() {
