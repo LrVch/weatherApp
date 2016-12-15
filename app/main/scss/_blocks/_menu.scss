@@ -7,6 +7,16 @@
   min-height: 100%;
   transition: left .3s;
 
+  &.is-empty {
+    position: fixed;
+    z-index: 100;
+
+    @media #{$screen-md} {
+      position: relative;
+      z-index: initial;
+    }
+  }
+
   &.open {
     left: 0;
 

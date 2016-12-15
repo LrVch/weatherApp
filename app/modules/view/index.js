@@ -12,7 +12,7 @@ import eventMixin from "./../common/eventMixin";
 export default class View {
     constructor() {
         this._mainElement = new Hammer(document.body);
-        this._mainElement.get('swipe').set({threshold: 0, velocity:	0.1});
+        this._mainElement.get('swipe').set({threshold: 0, velocity: 0.1});
 
 
         this.currentCity = new CurrentCity(document.querySelector("[data-current-city]"));
@@ -21,8 +21,9 @@ export default class View {
         this.search = new Search(document.querySelector("[data-search]"));
         this.cityViewer = new CityViewer(document.querySelector("[data-city-viewer]"));
 
-        this.cityViewer.on(CityViewer.EVENTS.onDeleteCityGetDimention, isScrollOnDelete => {
-            if (isScrollOnDelete) {
+
+        this.cityViewer.on(CityViewer.EVENTS.onDeleteCityGetDimention, isScroll => {
+            if (isScroll) {
                 this.menu.setOffsetMargin();
             } else {
                 this.menu.removeOffsetMargin();
@@ -30,11 +31,11 @@ export default class View {
         });
 
         this.cityViewer.on(CityViewer.EVENTS.isScroll, () => {
-                this.menu.setOffsetMargin();
+            this.menu.setOffsetMargin();
         });
 
-        this.cityViewer.on(CityViewer.EVENTS.onAddCity, isScrollOnAdd => {
-            if (isScrollOnAdd) {
+        this.cityViewer.on(CityViewer.EVENTS.onAddCity, isScroll => {
+            if (isScroll) {
                 this.menu.setOffsetMargin();
             } else {
                 this.menu.removeOffsetMargin();
@@ -72,6 +73,10 @@ export default class View {
                 this.nexDays.setHeight(document.documentElement.clientHeight - parseInt(this.currentCity.getHeight()) + "px");
             } else {
                 this.nexDays.clearHeight();
+            }
+
+            if (document.documentElement.clientWidth < 768) {
+                this.currentCity.details.rebuild(this.currentCity.getFreeSpaceFroDetails());
             }
         });
 
@@ -128,7 +133,7 @@ export default class View {
         }
 
     }
-    
+
     _getScreenWidth() {
         return document.documentElement.clientWidth;
     }

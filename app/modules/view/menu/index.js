@@ -45,6 +45,14 @@ class Menu {
         document.body.classList.remove("menuSwipe");
     }
 
+    setStateIsEmpty() {
+        this._elem.classList.add("is-empty");
+    }
+
+    removeStateIsEmpty() {
+        this._elem.classList.remove("is-empty");
+    }
+
     _getScrollWidth() {
         const div = document.createElement("div");
         div.style.overflow = "scroll";

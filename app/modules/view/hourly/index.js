@@ -14,16 +14,17 @@ export default class Hourly {
         this._swipeElem = new Hammer(this._elem, {domEvents: true});
 
         this._swipeElem.on("swipeleft", (ev) => {
-            if(this._getLengthOfItems() < 4) {
+
+            if (this._getLengthOfItems() < 5) {
                 return;
             }
-
+            
             this._slider.classList.add("slide");
             this.trigger(this.constructor.EVENTS.onSwipeLeft, "");
         });
 
-        this._swipeElem .on("swiperight", (ev) => {
-            if(this._getLengthOfItems() < 4) {
+        this._swipeElem.on("swiperight", (ev) => {
+            if (this._getLengthOfItems() < 5) {
                 return;
             }
 
@@ -31,7 +32,7 @@ export default class Hourly {
             this.trigger(this.constructor.EVENTS.onSwipeRight, "");
         });
 
-        this._swipeElem .on("swipe", (ev) => {
+        this._swipeElem.on("swipe", (ev) => {
             this.trigger(this.constructor.EVENTS.onSwipe, "");
         });
     }
@@ -58,7 +59,7 @@ export default class Hourly {
     renderNA() {
         this._elem.innerHTML = templateNA();
         this.trigger(this.constructor.EVENTS.onRender, "");
-        
+
         setTimeout(() => {
             this._elem.classList.add("shown");
             setTimeout(() => {
@@ -73,6 +74,14 @@ export default class Hourly {
         this._elem.classList.remove("shown-slider");
         this.trigger(this.constructor.EVENTS.onDestroy, "");
     }
+
+    // hide() {
+    //     this._elem.classList.remove("shown");
+    // }
+    //
+    // show() {
+    //     this._elem.classList.add("shown");
+    // }
 
 
     get elem() {

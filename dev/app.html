@@ -29,18 +29,41 @@
     <div class="menu__city-viewer">
 <div class="city-viewer" data-city-viewer>
   <div class="city-viewer__inner" data-city-viewer-inner>
-    <div class="city-viewer__item active" data-geoId="6167865" data-city-viewer-item>Toronto, Canada<a class="city-viewer__item-close" href="#" data-city-viewer-item-close></a></div>
-    <div class="city-viewer__item" data-geoId="5368361" data-city-viewer-item>Los Angeles, USA<a class="city-viewer__item-close" href="#" data-city-viewer-item-close></a></div>
-    <div class="city-viewer__item" data-geoId="5368361" data-city-viewer-item>Los Angeles, USA<a class="city-viewer__item-close" href="#" data-city-viewer-item-close></a></div>
-    <div class="city-viewer__item" data-geoId="5368361" data-city-viewer-item>Los Angeles, USA<a class="city-viewer__item-close" href="#" data-city-viewer-item-close></a></div>
-    <div class="city-viewer__item" data-geoId="5368361" data-city-viewer-item>Los Angeles, USA<a class="city-viewer__item-close" href="#" data-city-viewer-item-close></a></div>
-    <div class="city-viewer__item" data-geoId="5368361" data-city-viewer-item>Los Angeles, USA<a class="city-viewer__item-close" href="#" data-city-viewer-item-close></a></div>
-    <div class="city-viewer__item" data-geoId="5368361" data-city-viewer-item>Los Angeles, USA<a class="city-viewer__item-close" href="#" data-city-viewer-item-close></a></div>
-    <div class="city-viewer__item" data-geoId="5368361" data-city-viewer-item>Los Angeles, USA<a class="city-viewer__item-close" href="#" data-city-viewer-item-close></a></div>
-    <div class="city-viewer__item" data-geoId="5368361" data-city-viewer-item>Los Angeles, USA<a class="city-viewer__item-close" href="#" data-city-viewer-item-close></a></div>
-    <div class="city-viewer__item" data-geoId="5368361" data-city-viewer-item>Los Angeles, USA<a class="city-viewer__item-close" href="#" data-city-viewer-item-close></a></div>
-    <div class="city-viewer__item" data-geoId="5368361" data-city-viewer-item>Los Angeles, USA<a class="city-viewer__item-close" href="#" data-city-viewer-item-close></a></div>
+    <!--.city-viewer__item(data-geoId = "6167865" data-city-viewer-item).active-->
+    <!--    | Toronto, Canada-->
+    <!--    a(href="#" data-city-viewer-item-close ).city-viewer__item-close-->
+    <!--.city-viewer__item(data-geoId = "5368361" data-city-viewer-item)-->
+    <!--    | Los Angeles, USA-->
+    <!--    a(href="#" data-city-viewer-item-close ).city-viewer__item-close-->
+    <!--.city-viewer__item(data-geoId = "5368361" data-city-viewer-item)-->
+    <!--    | Los Angeles, USA-->
+    <!--    a(href="#" data-city-viewer-item-close ).city-viewer__item-close-->
+    <!--.city-viewer__item(data-geoId = "5368361" data-city-viewer-item)-->
+    <!--    | Los Angeles, USA-->
+    <!--    a(href="#" data-city-viewer-item-close ).city-viewer__item-close-->
+    <!--.city-viewer__item(data-geoId = "5368361" data-city-viewer-item)-->
+    <!--    | Los Angeles, USA-->
+    <!--    a(href="#" data-city-viewer-item-close ).city-viewer__item-close-->
+    <!--.city-viewer__item(data-geoId = "5368361" data-city-viewer-item)-->
+    <!--    | Los Angeles, USA-->
+    <!--    a(href="#" data-city-viewer-item-close ).city-viewer__item-close-->
+    <!--.city-viewer__item(data-geoId = "5368361" data-city-viewer-item)-->
+    <!--    | Los Angeles, USA-->
+    <!--    a(href="#" data-city-viewer-item-close ).city-viewer__item-close-->
+    <!--.city-viewer__item(data-geoId = "5368361" data-city-viewer-item)-->
+    <!--    | Los Angeles, USA-->
+    <!--    a(href="#" data-city-viewer-item-close ).city-viewer__item-close-->
+    <!--.city-viewer__item(data-geoId = "5368361" data-city-viewer-item)-->
+    <!--    | Los Angeles, USA-->
+    <!--    a(href="#" data-city-viewer-item-close ).city-viewer__item-close-->
+    <!--.city-viewer__item(data-geoId = "5368361" data-city-viewer-item)-->
+    <!--    | Los Angeles, USA-->
+    <!--    a(href="#" data-city-viewer-item-close ).city-viewer__item-close-->
+    <!--.city-viewer__item(data-geoId = "5368361" data-city-viewer-item)-->
+    <!--    | Los Angeles, USA-->
+    <!--    a(href="#" data-city-viewer-item-close ).city-viewer__item-close-->
   </div>
+  <div class="city-viewer__blocker"></div>
 </div>
     </div>
     <div class="menu__tongue"></div>
@@ -51,7 +74,7 @@
         <!-- content-->
 <div class="content">
   <div class="content__inner">
-<div class="current-city" data-current-city>
+<div class="current-city init" data-current-city>
   <div class="current-city__inner">
 <div class="city">
   <div class="city__name" data-city-name>Toronto, Canada</div>
@@ -60,7 +83,7 @@
       <div class="city__weather" data-city-weather>Cloudly</div>
       <div class="city__temp celcius" data-city-temp>18</div>
     </div>
-    <div class="city__descr-img-wrap"><img class="city__descr-img" src="/img/m11d.svg" data-city-img>
+    <div class="city__descr-img-wrap"><img class="city__descr-img" src="" data-city-img>
       <div class="city__date" data-city-data>25 November</div>
     </div>
   </div>
@@ -69,7 +92,7 @@
   </div>
   <div class="city__hourly" data-hourly>
     <!-- include ./_hourly.pug-->
-  </div><a class="city__more" href="#" data-more-details>more details</a><a class="city__reload" href="#" data-reload-data><img class="city__reload-img" src="/img/cloud-reload.svg"></a>
+  </div><a class="city__more" href="#" data-more-details>more details</a><a class="city__reload" href="#" data-reload-data><img class="city__reload-img" src="/img/cloud-reload.svg?hash=428079"></a>
 </div>
   </div>
   <div class="current-city__overlay" data-current-city-overlay></div>
@@ -88,6 +111,8 @@
   <!--        include ./_next-day.pug-->
 </div>
   </div>
+  <div class="preloader"></div>
+  <div class="welcome-screen"></div>
 </div>
         <!-- END content-->
       </div>
@@ -95,6 +120,5 @@
     </div>
     <!-- END wrapper-->
     <div class="overflow"></div>
-    <div class="preloader"></div>
-  <script type="text/javascript" src="/app.js?hash=4e403f64b8760906b5f1"></script></body>
+  <script type="text/javascript" src="/app.js?hash=84cd5331a1b97d0c09d5"></script></body>
 </html>

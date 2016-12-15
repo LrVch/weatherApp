@@ -16,6 +16,10 @@
     font-size: 20px;
     font-weight: bold;
     text-align: center;
+
+    @media #{$screen-md}  {
+      content: "Just start typing city's name";
+    }
   }
 
   &.show {

@@ -28,7 +28,7 @@ export default class Details {
         this._elem.classList.add("hidden");
     }
 
-    show(cb) {
+    show() {
         this._elem.classList.remove("hidden");
     }
 
@@ -51,6 +51,23 @@ export default class Details {
         // console.log(col);
         // console.log(freeSpace);
         // console.log(freeSpace / itemHeight);
+    }
+    
+    rebuild(freeSpace) {
+        const elems = this._elem.querySelectorAll(".details__item ");
+        const itemHeight = this._getItemInListHeight();
+        let col = parseInt(freeSpace / itemHeight) >= 2 ? parseInt(freeSpace / itemHeight) : 1;
+        col = (col > 4) ? 4 : col;
+
+        for(let elem of elems) {
+            elem.classList.remove("datails--more");
+        }
+
+        for(let i = 0; i < elems.length; i++) {
+            if (i >= col) {
+                elems[i].classList.add("datails--more");
+            }
+        }
     }
 
     _getItemInListHeight() {

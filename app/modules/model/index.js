@@ -35,7 +35,7 @@ export default class Model {
     }
 
     dataHandler(data) {
-        console.log("fetched data", data);
+        // console.log("fetched data", data);
 
         this._writeDataForMain(data);
         this._writeDataForDetails(data);
@@ -66,7 +66,7 @@ export default class Model {
         }
 
         this._saveDataToLocalStorage();
-        console.log(this._db);
+        // console.log(this._db);
     }
 
     removeCityFromDb(id) {
@@ -127,7 +127,8 @@ export default class Model {
         activeCity.main.temp = Math.round(main.main.temp);
         activeCity.main.data = new Date().toLocaleString("en-US", {
             day: "numeric",
-            month: "short"
+            month: "short",
+            weekday: 'short',
         });
         // activeCity.main.img = `/img/${this._db.transformIcons(main.weather[0].icon)}.svg`;
         activeCity.main.img = `img/${this._db.transformIcons(main.weather[0].icon)}.svg`;
@@ -159,7 +160,7 @@ export default class Model {
         const days = {};
 
         for(let day of dataDays) {
-            let date = new Date(+(day.dt + "000"));
+            let date = new Date(day.dt  * 1000);
             let keyTime = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 
             if (!days[keyTime]) {
@@ -168,8 +169,10 @@ export default class Model {
             days[keyTime].push(day);
         }
 
-        const todayHourly = days[new Date().toISOString().split("T")[0]];
+        const today = new Date();
+        const todayHourly = days[`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`];
         // console.log(todayHourly)
+        // console.log(days)
         this._writeDataForTodayHourly(todayHourly);
 
 
@@ -188,7 +191,7 @@ export default class Model {
 
     _writeDataForTodayHourly(data) {
         const hourly = [];
-        // console.log(data)
+        // console.log("_writeDataForTodayHourly", data);
 
         if (!data) {
             return;
@@ -226,7 +229,7 @@ export default class Model {
             });
         }
 
-        console.log(data)
+        // console.log(data);
 
         this._db.activeCity.days = days;
     }

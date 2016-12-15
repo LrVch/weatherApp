@@ -8,8 +8,9 @@ import "./../../../vendors/hammer";
 export default class CurrentCity {
     constructor(elem) {
         this._elem = elem;
-        // флаг наличия класса small у elem
+
         this._isSmallClass = false;
+        this._isMoreDetailsShown = false;
         
         
         this.details = new Details();
@@ -77,7 +78,6 @@ export default class CurrentCity {
 
         this._elem.style.height = parseInt(cityHeight) - event.distance + "px";
         this.trigger(this.constructor.EVENTS.onChangeHeightByPan, event.distance);
-        // this.details.setFontSize(parseInt(this.details.getFontSize()) - (parseInt(cityHeight) / 200) + "px");
     }
 
     _handlePanDown(event) {
@@ -155,9 +155,6 @@ export default class CurrentCity {
         if (!this._elem.classList.contains("show-more-details")) {
             this._elem.classList.add("show-more-details");
 
-            // this._elem.classList.remove("vertical");
-
-
             if (this._elem.classList.contains("small")) {
                 this.details.show();
                 this.details.showMore();
@@ -171,6 +168,7 @@ export default class CurrentCity {
 
             setTimeout(() => {
                 this._elem.classList.add("shown");
+                this._isMoreDetailsShown = true;
             }, 0);
 
         } else {
@@ -186,6 +184,8 @@ export default class CurrentCity {
                 self.details.hideMore();
                 self.trigger(self.constructor.EVENTS.onHiddenMoreDetails, "");
                 elem.innerHTML = "more details";
+                self.details.rebuild(self.getFreeSpaceFroDetails());
+                self._isMoreDetailsShown = false;
             });
         }
     }
@@ -212,8 +212,10 @@ export default class CurrentCity {
             this._elem.classList.remove("small");
         } else {
             if (this._isSmallClass) {
-                this.details.hide();
                 this._elem.style.height = "50%";
+                if (!this._isMoreDetailsShown) {
+                    this.details.hide();
+                }
                 setTimeout(() => {
                     this._elem.style.height = "";
                     this._elem.classList.add("small");
@@ -224,7 +226,6 @@ export default class CurrentCity {
 
     _onAnimationEnd() {
         this._elem.style.height = "";
-        this.details.clearFontSize();
         this.trigger(this.constructor.EVENTS.onAnimationEnd, "");
 
         if (this._isLandscape()) {
@@ -235,6 +236,7 @@ export default class CurrentCity {
             } else {
                 this._showReloadButton();
                 this.trigger(this.constructor.EVENTS.onChangeHeightAfterAnimationPanDown);
+                this.details.rebuild(this.getFreeSpaceFroDetails());
                 this.details.show();
             }
         }

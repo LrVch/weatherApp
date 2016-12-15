@@ -14,9 +14,11 @@ const SELECTORS = {
 class CityViewer {
     constructor(elem) {
         this._elem = elem;
+        this._state = {
+            cities: 0
+        };
 
         elem.addEventListener("click", this._manager.bind(this));
-
 
         this.on("onAddedListOfCities", () => {
             if (this.isScroll()) {
@@ -25,6 +27,8 @@ class CityViewer {
                 this.trigger(this.constructor.EVENTS.noScroll);
             }
         });
+
+        this._checkState();
     }
 
     getItemHeight() {
@@ -44,6 +48,10 @@ class CityViewer {
         result += itemHeight;
 
         return result;
+    }
+
+    isEmpty() {
+        return this.getItemsLength() === 0;
     }
 
     showPreloader() {
@@ -82,15 +90,7 @@ class CityViewer {
         return this._elem.querySelectorAll(SELECTORS.viewerItem).length;
     }
 
-    isScrollOnAdd() {
-        return this.getAllItemsHeight() > this.getViewerHeight();
-    }
-
     isScroll() {
-        return this.getAllItemsHeight() > this.getViewerHeight();
-    }
-
-    isScrollOnDelete() {
         return this.getAllItemsHeight() > this.getViewerHeight();
     }
 
@@ -106,7 +106,7 @@ class CityViewer {
 
         parent.insertBefore(newElem, parent.firstElementChild);
         this._setActiveClass(newElem);
-        this.trigger(this.constructor.EVENTS.onAddCity, this.isScrollOnAdd());
+        this.trigger(this.constructor.EVENTS.onAddCity, this.isScroll());
     }
 
     addListOfCities(citiesData) {
@@ -200,9 +200,47 @@ class CityViewer {
         this.trigger(this.constructor.EVENTS.onDeleteCity, parseInt(geoId));
 
         if (this.getItemsLength() > 0) {
-            this.trigger(this.constructor.EVENTS.onDeleteCityGetDimention, this.isScrollOnDelete());
+            this.trigger(this.constructor.EVENTS.onDeleteCityGetDimention, this.isScroll());
         }
 
+    }
+
+    getState() {
+        return this._state;
+    }
+
+    _checkState() {
+        this.on(this.constructor.EVENTS.onAddCity, () => {
+            this._writeState();
+        });
+
+        this.on(this.constructor.EVENTS.onAddedListOfCities, () => {
+            this._writeState();
+        });
+
+        this.on(this.constructor.EVENTS.onDeleteCity, () => {
+            this._writeState();
+        });
+
+        this.on(this.constructor.EVENTS.onDeletAllCities, () => {
+            this._writeState();
+        });
+
+        window.addEventListener("resize", () => {
+            setTimeout(() => {
+                this._writeState();
+            }, 0);
+        })
+    }
+
+    _writeState() {
+        this._state.cities = this.getItemsLength();
+        if (this.getItemsLength() === 0) {
+            this._state.isScroll = false;
+        } else {
+            this._state.isScroll = this.isScroll();
+        }
+        this._state.isEmpty = this.isEmpty();
     }
 
     static get EVENTS() {
