@@ -1,9 +1,20 @@
 .search {
-  height: 30%;
+  position: relative;
+  z-index: 20;
 
   .tp-ac__item {
     padding-top: 10px;
     padding-bottom: 10px;
+  }
+
+  &.block {
+    .search__block {
+      display: block;
+    }
+
+    .search__inner {
+      opacity: .6;
+    }
   }
 }
 
@@ -21,4 +32,14 @@
   font-size: 22px;
   -webkit-appearance: none;
   text-overflow: ellipsis;
+  transition: opacity .3s;
+}
+
+.search__block {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

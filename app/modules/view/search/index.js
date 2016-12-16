@@ -17,6 +17,14 @@ class Search {
     _sendCityData(cityData) {
         this.trigger(this.constructor.EVENTS.onGetCity, cityData);
     }
+    
+    disable() {
+        this._elem.classList.add("block");
+    }
+
+    enable() {
+        this._elem.classList.remove("block");
+    }
 
     static get EVENTS () {
         return {

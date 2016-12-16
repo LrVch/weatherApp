@@ -99,6 +99,7 @@ export default class Controller {
             this._view.hideRefreshing();
             this._view.cityViewer.hidePreloaderOnAddCity();
             this._view.currentCity.hourly.refresh(data.hourly);
+            this._view.search.enable();
         });
 
         this._model.on(Model.EVENTS.onRestoreDataBegin, () => {
@@ -167,6 +168,7 @@ export default class Controller {
                 return;
             }
 
+            this._view.search.disable();
             this._model.getDataForNewCity(city);
             this._view.cityViewer.lockViewer();
             if (!this._model.isCityInDb(city.id)) {
