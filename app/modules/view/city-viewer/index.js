@@ -8,7 +8,8 @@ const SELECTORS = {
     closeButton: "[data-city-viewer-item-close]",
     viewerItem: "[data-city-viewer-item]",
     viewerInner: "[data-city-viewer-inner]",
-    activeClass: "active"
+    activeClass: "active",
+    preloaderOnAddCity: "[preloader-on-add-city]"
 };
 
 class CityViewer {
@@ -32,7 +33,8 @@ class CityViewer {
     }
 
     getItemHeight() {
-        return this._elem.querySelector(SELECTORS.viewerItem).clientHeight;
+        // console.log()
+        return this._elem.querySelector(SELECTORS.viewerItem) ? this._elem.querySelector(SELECTORS.viewerItem).clientHeight : 0;
     }
 
     getAllItemsHeight() {
@@ -54,11 +56,38 @@ class CityViewer {
         return this.getItemsLength() === 0;
     }
 
-    showPreloader() {
+    showPreloaderOnAddCity() {
+        const preloader = document.createElement("div");
+        const inner = this._elem.querySelector(SELECTORS.viewerInner);
+
+        preloader.className = "city-viewer__preloader";
+        preloader.setAttribute("preloader-on-add-city", "");
+
+        if (!this.isEmpty()) {
+            const elem = this._elem.querySelector(SELECTORS.viewerItem);
+
+            const computedStyle = getComputedStyle(elem);
+            preloader.style.marginTop = computedStyle.marginTop;
+            preloader.style.marginBottom = computedStyle.marginBottom;
+            preloader.style.height = elem.offsetHeight + "px";
+        }
+
+        inner.insertBefore(preloader, inner.firstElementChild);
+        this.trigger(this.constructor.EVENTS.onShowPreloaderAddCity, this.isScroll());
 
     }
 
-    hidePreloader() {
+    hidePreloaderOnAddCity() {
+        const preloader = this._elem.querySelector(SELECTORS.preloaderOnAddCity);
+
+        if (!preloader) {
+            return;
+        }
+
+        preloader.parentNode.removeChild(preloader);
+        setTimeout(() => {
+            this.trigger(this.constructor.EVENTS.onHidePreloaderAddCity, this.isScroll());
+        }, 0);
 
     }
 
@@ -83,11 +112,12 @@ class CityViewer {
     }
 
     getItemMarginBottom() {
-        return parseInt(getComputedStyle(this._elem.querySelector(SELECTORS.viewerItem)).marginBottom);
+        return this._elem.querySelector(SELECTORS.viewerItem) ? parseInt(getComputedStyle(this._elem.querySelector(SELECTORS.viewerItem)).marginBottom) : 0;
     }
 
     getItemsLength() {
-        return this._elem.querySelectorAll(SELECTORS.viewerItem).length;
+        // return this._elem.querySelectorAll(SELECTORS.viewerItem).length;
+        return this._elem.querySelector(SELECTORS.viewerInner).children.length || 0;
     }
 
     isScroll() {
@@ -252,7 +282,9 @@ class CityViewer {
             "onAddCity": "onAddCity",
             "isScroll": "isScroll",
             "noScroll": "noScroll",
-            "onAddedListOfCities": "onAddedListOfCities"
+            "onAddedListOfCities": "onAddedListOfCities",
+            "onShowPreloaderAddCity": "onShowPreloaderAddCity",
+            "onHidePreloaderAddCity": "onHidePreloaderAddCity"
         }
     }
 }

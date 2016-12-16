@@ -226,18 +226,20 @@ export default class CurrentCity {
 
     _onAnimationEnd() {
         this._elem.style.height = "";
+        this.details.rebuild(this.getFreeSpaceFroDetails());
         this.trigger(this.constructor.EVENTS.onAnimationEnd, "");
 
         if (this._isLandscape()) {
             this.trigger(this.constructor.EVENTS.onChangeHeightAfterAnimation, "");
+            // this.details.rebuild(this.getFreeSpaceFroDetails());
         } else {
             if (this._elem.classList.contains("small")) {
                 this.trigger(this.constructor.EVENTS.onChangeHeightAfterAnimationPanUp, document.documentElement.clientHeight - parseInt(getComputedStyle(this._elem).height));
             } else {
                 this._showReloadButton();
                 this.trigger(this.constructor.EVENTS.onChangeHeightAfterAnimationPanDown);
-                this.details.rebuild(this.getFreeSpaceFroDetails());
-                this.details.show();
+                // this.details.rebuild(this.getFreeSpaceFroDetails());
+                // this.details.show();
             }
         }
     }

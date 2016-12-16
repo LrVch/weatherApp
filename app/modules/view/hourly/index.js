@@ -9,6 +9,7 @@ export default class Hourly {
     constructor(elem) {
         this._elem = document.createElement("div");
         this._elem.className = "hourly";
+        this.isRendered = false;
 
 
         this._swipeElem = new Hammer(this._elem, {domEvents: true});
@@ -51,9 +52,23 @@ export default class Hourly {
             this._elem.classList.add("shown");
             setTimeout(() => {
                 this._elem.classList.add("shown-slider");
+                this.isRendered = true;
             }, 50);
         }, 0);
+    }
 
+    refresh(data) {
+        if (!this.isRendered) {
+            return;
+            
+        }
+        
+        const slides = this._elem.querySelectorAll(".hourly__slide");
+
+        for (let i = 0; i < data.length; i++) {
+            slides[i].querySelector(".hourly__slide-time").innerHTML = data[i].time;
+            slides[i].querySelector(".hourly__slide-temp").innerHTML = data[i].temp;
+        }
     }
 
     renderNA() {
@@ -73,16 +88,8 @@ export default class Hourly {
         this._elem.classList.remove("shown");
         this._elem.classList.remove("shown-slider");
         this.trigger(this.constructor.EVENTS.onDestroy, "");
+        this.isRendered = false;
     }
-
-    // hide() {
-    //     this._elem.classList.remove("shown");
-    // }
-    //
-    // show() {
-    //     this._elem.classList.add("shown");
-    // }
-
 
     get elem() {
         return this._elem;

@@ -96,6 +96,9 @@ export default class Controller {
             this._view.cityViewer.hidePreloaderOnCity(document.querySelector("[data-geoid = '" + data.id + "']"));
             this._view.cityViewer.unlockViewer();
             this._view.menu.enable();
+            this._view.hideRefreshing();
+            this._view.cityViewer.hidePreloaderOnAddCity();
+            this._view.currentCity.hourly.refresh(data.hourly);
         });
 
         this._model.on(Model.EVENTS.onRestoreDataBegin, () => {
@@ -114,9 +117,9 @@ export default class Controller {
             this._view.menu.removeStateIsEmpty();
         });
 
-        this._model.on(Model.EVENTS.onSetActiveCity, (data) => {
-            this._view.cityViewer._setActiveClass(document.querySelector("[data-geoid = '" + data.id + "']"));
-        });
+        // this._model.on(Model.EVENTS.onSetActiveCity, (data) => {
+        //     this._view.cityViewer._setActiveClass(document.querySelector("[data-geoid = '" + data.id + "']"));
+        // });
         
         this._model.on(Model.EVENTS.onAddListOfCities, (data) => {
             // console.log(data)
@@ -127,6 +130,8 @@ export default class Controller {
 
         this._view.currentCity.on(View.EVENTS.CurrentCity.onReloadDataRequest, event => {
             this._model.reloadData();
+            this._view.showRefreshing();
+            this._view.cityViewer.lockViewer();
         });
         
         
@@ -164,12 +169,12 @@ export default class Controller {
 
             this._model.getDataForNewCity(city);
             this._view.cityViewer.lockViewer();
-
-            // this._view.showPreloader();
-            // setTimeout(() => {
-
-            // }, 0);
-
+            if (!this._model.isCityInDb(city.id)) {
+                this._view.cityViewer.showPreloaderOnAddCity();
+            } else {
+                this._view.cityViewer._setActiveClass(document.querySelector("[data-geoid = '" + city.id + "']"));
+                this._view.cityViewer.showPreloaderOnCity(document.querySelector("[data-geoid = '" + city.id + "']"));
+            }
         });
         
 

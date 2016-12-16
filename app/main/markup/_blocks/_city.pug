@@ -1,12 +1,12 @@
 .city
-    .city__name(data-city-name) Toronto, Canada
+    .city__name(data-city-name)
     .city__descr
         .city__descr-main
-            .city__weather(data-city-weather) Cloudly
-            .city__temp.celcius(data-city-temp) 18
+            .city__weather(data-city-weather)
+            .city__temp.celcius(data-city-temp)
         .city__descr-img-wrap
             img(src="" data-city-img).city__descr-img
-            .city__date(data-city-data) 25 November
+            .city__date(data-city-data)
     .city__details(data-details)
         // include ./_details.pug
     .city__hourly(data-hourly)
@@ -14,4 +14,4 @@
 
     a(href="#" data-more-details).city__more more details
     a(href="#" data-reload-data).city__reload
-        img(src=require("./../../../img/cloud-reload.svg")).city__reload-img
+        img(src=require("./../../../img/refreshing.svg")).city__reload-img

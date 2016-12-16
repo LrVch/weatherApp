@@ -69,6 +69,10 @@ export default class Model {
         // console.log(this._db);
     }
 
+    isCityInDb(id) {
+        return this._cityIsExist(id);
+    }
+
     removeCityFromDb(id) {
         delete this._db.cities[id];
         this._saveDataToLocalStorage();

@@ -1,8 +1,8 @@
 .details {
   position: relative;
-  //max-width: 60%;
   margin: 0;
   padding: 0;
+  //overflow: hidden;
 
   @media #{$screen-sm} {
     font-size: 24px;
@@ -20,7 +20,7 @@
     .details__item {
       margin-bottom: 10px;
 
-      &.datails--more {
+      &.details--more {
         display: block;
       }
 
@@ -40,7 +40,11 @@
   list-style-type: none;
   //transition: all .1s;
 
-  &.datails--more {
+  &.details--more {
+    display: none;
+  }
+
+  &.details--hidden {
     display: none;
   }
 

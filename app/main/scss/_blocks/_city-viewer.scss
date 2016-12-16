@@ -71,6 +71,16 @@
   height: 100%;
 }
 
+.city-viewer__preloader {
+  height: 40px;
+  margin-bottom: 5px;
+  //transition: height .3s;
+  background-image: url("#{$dir}/wheel.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 38px;
+}
+
 @keyframes rotate {
   0% {
     transform: translateY(-50%) rotate(45deg);

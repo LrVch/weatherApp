@@ -43,29 +43,28 @@ export default class Details {
     render(data, freeSpace) {
         const itemHeight = this._getItemInListHeight();
         let col = parseInt(freeSpace / itemHeight) >= 2 ? parseInt(freeSpace / itemHeight) : 1;
-        col = (col > 4) ? 4 : col;
+        col = (col > 3) ? 3 : col;
         // const html = template({items: data, freeSpace: ()});
         this._elem.innerHTML = template({items: data, freeSpace: col});
 
-
-        // console.log(col);
-        // console.log(freeSpace);
-        // console.log(freeSpace / itemHeight);
+        // console.log(col)
     }
     
     rebuild(freeSpace) {
         const elems = this._elem.querySelectorAll(".details__item ");
         const itemHeight = this._getItemInListHeight();
         let col = parseInt(freeSpace / itemHeight) >= 2 ? parseInt(freeSpace / itemHeight) : 1;
-        col = (col > 4) ? 4 : col;
+        col = (col > 3) ? 3 : col;
 
         for(let elem of elems) {
-            elem.classList.remove("datails--more");
+            // elem.classList.add("details--hidden");
+            elem.classList.remove("details--more");
         }
 
         for(let i = 0; i < elems.length; i++) {
+            // elems[i].classList.remove("details--hidden");
             if (i >= col) {
-                elems[i].classList.add("datails--more");
+                elems[i].classList.add("details--more");
             }
         }
     }

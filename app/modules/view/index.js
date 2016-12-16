@@ -42,6 +42,22 @@ export default class View {
             }
         });
 
+        this.cityViewer.on(CityViewer.EVENTS.onShowPreloaderAddCity, isScroll => {
+            if (isScroll) {
+                this.menu.setOffsetMargin();
+            } else {
+                this.menu.removeOffsetMargin();
+            }
+        });
+
+        this.cityViewer.on(CityViewer.EVENTS.onHidePreloaderAddCity, isScroll => {
+            if (isScroll) {
+                this.menu.setOffsetMargin();
+            } else {
+                this.menu.removeOffsetMargin();
+            }
+        });
+
         this.currentCity.on(CurrentCity.EVENTS.onShowMoreDetails, event => {
             this.menu.disable();
         });
@@ -75,9 +91,9 @@ export default class View {
                 this.nexDays.clearHeight();
             }
 
-            if (document.documentElement.clientWidth < 768) {
+            // if (document.documentElement.clientWidth < 768) {
                 this.currentCity.details.rebuild(this.currentCity.getFreeSpaceFroDetails());
-            }
+            // }
         });
 
         this._mainElement.on("swipeleft", (ev) => {
@@ -115,6 +131,14 @@ export default class View {
 
     hideWelcomeScreen() {
         document.querySelector(".welcome-screen").classList.remove("show");
+    }
+
+    showRefreshing() {
+        document.querySelector(".city__reload").classList.add("reloading");
+    }
+
+    hideRefreshing() {
+        document.querySelector(".city__reload").classList.remove("reloading");
     }
 
     _enableDisableMenu() {
