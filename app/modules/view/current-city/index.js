@@ -239,7 +239,7 @@ export default class CurrentCity {
                 this._showReloadButton();
                 this.trigger(this.constructor.EVENTS.onChangeHeightAfterAnimationPanDown);
                 // this.details.rebuild(this.getFreeSpaceFroDetails());
-                // this.details.show();
+                this.details.show();
             }
         }
     }

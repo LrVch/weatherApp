@@ -170,6 +170,19 @@ export default class View {
         return document.documentElement.clientHeight < document.documentElement.clientWidth;
     }
 
+    showMessage(message) {
+        const popup = document.querySelector(".popup");
+        const inner = popup.querySelector(".popup__inner");
+
+        inner.innerHTML = message;
+        popup.classList.add("show");
+
+        popup.addEventListener("click", function me(event) {
+            this.classList.remove("show");
+            this.removeEventListener("click", me);
+        });
+    }
+
     static get EVENTS() {
         return {
             "resizeWindow": "resizeWindow",

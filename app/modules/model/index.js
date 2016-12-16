@@ -16,6 +16,7 @@ export default class Model {
         this.tzOffsetMinutes = 0;
     }
 
+
     _getUrls(city, api) {
         return [
             // api.url + api.weather + "?id=" + city.id + "&units=metric" + "&APPID=" + api.appid,
@@ -258,7 +259,9 @@ export default class Model {
     }
 
     hadnleError(error) {
-        console.log(error);
+        if (error.name === "FetchDataError") {
+            this.trigger(this.constructor.EVENTS.onFetchDataError);
+        }
     }
 
     _firstLetterToUpperCase(str) {
@@ -352,6 +355,7 @@ export default class Model {
             "onAddListOfCities": "onAddListOfCities",
             "onRestoreDataBegin": "onRestoreDataBegin",
             "onEmptyStorage": "onEmptyStorage",
+            "onFetchDataError": "onFetchDataError",
             FetchData: FetchData.EVENTS
         }
     }

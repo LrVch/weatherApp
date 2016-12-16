@@ -71,7 +71,8 @@ class CityViewer {
             preloader.style.marginBottom = computedStyle.marginBottom;
             preloader.style.height = elem.offsetHeight + "px";
         }
-
+        
+        inner.scrollTop = 0;
         inner.insertBefore(preloader, inner.firstElementChild);
         this.trigger(this.constructor.EVENTS.onShowPreloaderAddCity, this.isScroll());
 

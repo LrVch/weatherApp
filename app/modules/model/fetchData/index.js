@@ -18,7 +18,6 @@ export default class FetchData {
                 .then((response) => {
                     if (response.status !== 200) {
                         const error = new Error(response.statusText);
-
                         error.code = response.status;
 
                         throw error;

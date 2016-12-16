@@ -102,6 +102,18 @@ export default class Controller {
             this._view.search.enable();
         });
 
+        this._model.on(Model.EVENTS.onFetchDataError, () => {
+            this._view.search.enable();
+            this._view.cityViewer.hidePreloaderOnAddCity();
+
+            setTimeout(() => {
+                this._view.showMessage("Connection error <br> try again or choose another city");
+            });
+
+
+        });
+
+
         this._model.on(Model.EVENTS.onRestoreDataBegin, () => {
             this._view.showPreloader();
             this._view.menu.disable();
