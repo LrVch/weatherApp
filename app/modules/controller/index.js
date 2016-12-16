@@ -174,6 +174,7 @@ export default class Controller {
             } else {
                 this._view.cityViewer._setActiveClass(document.querySelector("[data-geoid = '" + city.id + "']"));
                 this._view.cityViewer.showPreloaderOnCity(document.querySelector("[data-geoid = '" + city.id + "']"));
+                document.querySelector("[data-geoid = '" + city.id + "']").scrollIntoView();
             }
         });
         

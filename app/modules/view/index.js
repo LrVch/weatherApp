@@ -92,7 +92,7 @@ export default class View {
             }
 
             // if (document.documentElement.clientWidth < 768) {
-                this.currentCity.details.rebuild(this.currentCity.getFreeSpaceFroDetails());
+            this.currentCity.details.rebuild(this.currentCity.getFreeSpaceFroDetails());
             // }
         });
 
@@ -134,11 +134,15 @@ export default class View {
     }
 
     showRefreshing() {
+        const elem = document.querySelector(".city__reload");
+
         document.querySelector(".city__reload").classList.add("reloading");
     }
 
     hideRefreshing() {
-        document.querySelector(".city__reload").classList.remove("reloading");
+        const elem = document.querySelector(".city__reload");
+
+        elem.classList.remove("reloading");
     }
 
     _enableDisableMenu() {
